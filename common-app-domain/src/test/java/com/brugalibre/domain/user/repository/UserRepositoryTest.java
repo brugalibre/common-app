@@ -1,6 +1,6 @@
 package com.brugalibre.domain.user.repository;
 
-import com.brugalibre.common.domain.config.CommonAppPersistenceConfig;
+import com.brugalibre.common.domain.app.config.TestCommonAppPersistenceConfig;
 import com.brugalibre.domain.user.model.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-@SpringBootTest(classes = CommonAppPersistenceConfig.class)
+@SpringBootTest(classes = TestCommonAppPersistenceConfig.class)
 class UserRepositoryTest {
 
    @Autowired

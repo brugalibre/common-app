@@ -5,7 +5,10 @@ import static java.util.Objects.nonNull;
 public class PhoneNumberValidator {
 
    /**
-    * Regex pattern for validation a phone-nr. Right now it validates only swiss numbers
+    * Regex pattern for validation a phone-nr. Right now it validates only swiss numbers like
+    * -  0041795306238
+    * -  0791234567
+    * <b>Note</b> Any phone number has to be normalized by calling {@link #normalizePhoneNumber(String)}!
     */
    public static final String PHONE_NR_PATTERN = "(^$)|(^\\d{10}$)|(^\\d{4}\\d{9}$)";
 

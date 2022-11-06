@@ -4,11 +4,8 @@ plugins {
 }
 
 apply from: '../test.gradle'
+apply from: '../common-app.gradle'
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
-
-group 'com.brugalibre'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -19,25 +16,9 @@ repositories {
 dependencies {
 
     // persistence
-    api group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.2'
-    api group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.7.3'
-    api group: 'com.h2database', name: 'h2', version: '2.1.214'
+    api 'org.springframework.boot:spring-boot-starter-data-jpa:3.0.0'
+    api 'org.springframework.boot:spring-boot-starter-validation:3.0.0'
+    compileOnly 'org.slf4j:slf4j-api:2.0.4'
 
-    // mapstruct
-    api group: 'org.mapstruct', name: 'mapstruct', version: '1.5.2.Final'
-    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
-
-    api group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
-}
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            from components.java
-        }
-    }
-}
-
-publish {
-    dependsOn assemble
+    testImplementation group: 'com.h2database', name: 'h2', version: '2.1.214'
 }

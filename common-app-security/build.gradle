@@ -1,0 +1,34 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+apply from: '../test.gradle'
+apply from: '../common-app.gradle'
+
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+
+    // app-domain & validation
+    compileOnly group: 'com.brugalibre', name: 'common-app-domain', version: '1.0-SNAPSHOT'
+    compileOnly 'org.springframework.data:spring-data-jpa:3.0.0'
+
+    // Security
+    implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0'
+    implementation('org.springframework.boot:spring-boot-starter-security:3.0.0') {
+        exclude group: 'org.apache.logging.log4j', module: 'log4j-to-slf4j'
+    }
+
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+    testImplementation group: 'com.brugalibre', name: 'common-app-domain', version: '1.0-SNAPSHOT'
+    testImplementation group: 'com.h2database', name: 'h2', version: '2.1.214'
+}

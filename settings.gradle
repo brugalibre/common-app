@@ -1,4 +1,4 @@
 rootProject.name = 'common-app'
-include 'common-app-persistence'
-include 'common-app-user'
+include 'common-app-security'
+include 'common-app-domain'
 
