@@ -1,0 +1,25 @@
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+
+group 'com.brugalibre'
+
+dependencies {
+
+    compileOnly 'org.slf4j:slf4j-api:2.0.5'
+    
+    // mapstruct
+    compileOnly group: 'org.mapstruct', name: 'mapstruct', version: '1.5.2.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+publish {
+    dependsOn assemble
+}

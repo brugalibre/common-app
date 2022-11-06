@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="fdc7a012-a46a-465d-9e37-a6bfd881e330" name="Changes" comment="Initial commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-app-domain/src/main/java/com/brugalibre/common/domain/mapper/CommonDomainModelMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-app-domain/src/main/java/com/brugalibre/common/domain/mapper/CommonDomainModelMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-app-domain/src/main/java/com/brugalibre/common/domain/repository/CommonDomainRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-app-domain/src/main/java/com/brugalibre/common/domain/repository/CommonDomainRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-app-domain/src/main/java/com/brugalibre/common/domain/repository/CommonDomainRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-app-domain/src/main/java/com/brugalibre/common/domain/repository/CommonDomainRepositoryImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +20,9 @@
       <ProjectState />
     </projectState>
     <projectState path="$PROJECT_DIR$/common-app-domain">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/common-app-security">
       <ProjectState />
     </projectState>
     <projectState path="$PROJECT_DIR$/common-app-ui">
@@ -41,6 +41,9 @@
         <task path="$PROJECT_DIR$/common-app-domain">
           <activation />
         </task>
+        <task path="$PROJECT_DIR$/common-app-security">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
@@ -57,13 +60,12 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="common-app-domain" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
+                <item name="publishing" type="c8890929:TasksNode$1" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="common-app-domain" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="publishing" type="c8890929:TasksNode$1" />
+                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
@@ -85,6 +87,17 @@
                 <item name="common-app-security" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="publishing" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="common-app-security" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="verification" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="common-app-security" type="f1a62948:ProjectNode" />
+                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
               </path>
             </expand>
             <select />
@@ -96,10 +109,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Record" />
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -118,6 +131,15 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/common-app-domain/src/main/java/com/brugalibre/common/domain/app/config/CommonAppPersistenceConfig.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/common-app-domain/src/test/java/com/brugalibre/domain/user/repository/UserRepositoryTest.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/common-app-domain/build.gradle" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/common-app-domain/src/main/java/com/brugalibre/persistence/user/dao/UserDao.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/common-app-security/build.gradle" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/common-app-domain/src/main/java/com/brugalibre/persistence/user/UserEntity.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/common-app-domain/src/main/java/com/brugalibre/common/domain/persistence/DomainEntity.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -138,8 +160,8 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
-    <property name="last_directory_selection" value="$PROJECT_DIR$/common-app-backend/src/main/java/com/brugalibre/common/security" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/common-app-security/src/test/java/com/brugalibre" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/common-app-security/src/main/java/com/brugalibre/common/security/auth/login" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -160,11 +182,11 @@
       <recent name="com.brugalibre.domain.user.exception" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\Dominic\Documents\Eigene Dateien\Programmierung\Java only\common-app\common-app-security\src\main\java\com\brugalibre\common\security\auth\login" />
+      <recent name="F:\Dominic\Documents\Eigene Dateien\Programmierung\Java only\common-app\common-app-security" />
+      <recent name="F:\Dominic\Documents\Eigene Dateien\Programmierung\Java only\common-app\common-app-domain" />
+      <recent name="F:\Dominic\Documents\Eigene Dateien\Programmierung\Java only\common-app\common-app-ui" />
       <recent name="F:\Dominic\Documents\Eigene Dateien\Programmierung\Java only\common-app" />
-      <recent name="F:\Dominic\Documents\Eigene Dateien\Programmierung\Java only\common-app\common-app-domain\src\test\resources" />
-      <recent name="F:\Dominic\Documents\Eigene Dateien\Programmierung\Java only\common-app\common-app-domain\gradle" />
-      <recent name="F:\Dominic\Documents\Eigene Dateien\Programmierung\Java only\common-app\common-app-backend\gradle" />
-      <recent name="F:\Dominic\Documents\Eigene Dateien\Programmierung\Java only\common-app\common-app-backend" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -177,73 +199,79 @@
       <recent name="com.brugalibre.domain.user.repository" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.brugalibre.common.security.auth.config" />
       <recent name="com.brugalibre.domain.user.mapper" />
       <recent name="com.brugalibre.domain.user.repository" />
       <recent name="com.brugalibre.common.domain" />
       <recent name="com.brugalibre.common.security.app.register.event" />
-      <recent name="com.brugalibre.common.app.config.security" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.common-app-domain [clean]">
-    <configuration name="common-app-domain [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.AuthControllerTest.authenticateUser (1)">
+    <configuration name="AuthControllerTest (1)" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/common-app-domain" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/common-app-security" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value="clean" />
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.brugalibre.common.security.rest.api.AuthControllerTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="common-app-domain [generateMetadataFileForMavenPublication]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="AuthControllerTest.authenticateUser (1)" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/common-app-domain" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/common-app-security" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value="generateMetadataFileForMavenPublication" />
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.brugalibre.common.security.rest.api.AuthControllerTest.authenticateUser&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="common-app-domain [publishMavenPublicationToMavenLocal]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="UserRepositoryTest (1)" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/common-app-domain" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value="publishMavenPublicationToMavenLocal" />
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.brugalibre.domain.user.repository.UserRepositoryTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
@@ -269,10 +297,10 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="common-app-domain [publish]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="common-app-security [publishToMavenLocal]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/common-app-domain" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/common-app-security" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" />
         <option name="taskDescriptions">
@@ -280,7 +308,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="publish" />
+            <option value="publishToMavenLocal" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -292,11 +320,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.common-app-domain [clean]" />
+        <item itemvalue="Gradle.AuthControllerTest.authenticateUser (1)" />
+        <item itemvalue="Gradle.common-app-security [publishToMavenLocal]" />
+        <item itemvalue="Gradle.AuthControllerTest (1)" />
         <item itemvalue="Gradle.common-app-domain [publishToMavenLocal]" />
-        <item itemvalue="Gradle.common-app-domain [publishMavenPublicationToMavenLocal]" />
-        <item itemvalue="Gradle.common-app-domain [publish]" />
-        <item itemvalue="Gradle.common-app-domain [generateMetadataFileForMavenPublication]" />
+        <item itemvalue="Gradle.UserRepositoryTest (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -321,6 +349,22 @@
       <workItem from="1667720370345" duration="9441000" />
       <workItem from="1667732184595" duration="2593000" />
       <workItem from="1667747992632" duration="306000" />
+      <workItem from="1667927321765" duration="606000" />
+      <workItem from="1667932198446" duration="728000" />
+      <workItem from="1668538606654" duration="123000" />
+      <workItem from="1668541126709" duration="975000" />
+      <workItem from="1668542590192" duration="12000" />
+      <workItem from="1668544570302" duration="2121000" />
+      <workItem from="1668628964990" duration="37000" />
+      <workItem from="1668629230554" duration="130000" />
+      <workItem from="1668629591675" duration="4283000" />
+      <workItem from="1668706922519" duration="1448000" />
+      <workItem from="1668709408487" duration="3805000" />
+      <workItem from="1668717760768" duration="14000" />
+      <workItem from="1668871197067" duration="1732000" />
+      <workItem from="1668874157497" duration="666000" />
+      <workItem from="1669563002658" duration="297000" />
+      <workItem from="1669563417757" duration="2759000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1667243510820</created>
@@ -504,7 +548,91 @@
       <option name="project" value="LOCAL" />
       <updated>1667747159734</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Initial commit">
+      <created>1667842920027</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1667842920028</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Initial commit">
+      <created>1667932349274</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1667932349274</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Initial commit">
+      <created>1668532659519</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1668532659519</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Initial commit">
+      <created>1668532792802</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1668532792802</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Initial commit">
+      <created>1668545028065</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1668545028065</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Initial commit">
+      <created>1668627264280</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1668627264280</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Initial commit">
+      <created>1668716509507</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1668716509509</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Initial commit">
+      <created>1668868483420</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1668868483420</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Initial commit">
+      <created>1668869215155</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1668869215156</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Initial commit">
+      <created>1668872354578</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1668872354578</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Initial commit">
+      <created>1668875339539</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1668875339542</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Initial commit">
+      <created>1669556942920</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1669556942922</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -1,11 +1,11 @@
 package com.brugalibre.common.domain.persistence;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
 import java.util.UUID;
 
 /**
@@ -23,8 +23,8 @@ public abstract class DomainEntity implements IEntity<String> {
    @GenericGenerator(name = "uuid", strategy = "uuid2")
    protected String id;
 
-   public DomainEntity(UUID id) {
-      this.id = id == null ? UUID.randomUUID().toString() : id.toString();
+   public DomainEntity(String id) {
+      this.id = id == null ? UUID.randomUUID().toString() : id;
    }
 
    public String getId() {

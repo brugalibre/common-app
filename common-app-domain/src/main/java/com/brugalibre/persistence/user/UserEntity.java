@@ -4,9 +4,9 @@ import com.brugalibre.common.domain.persistence.DomainEntity;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,10 +35,11 @@ public class UserEntity extends DomainEntity {
       this.roles = new ArrayList<>();
    }
 
-   public UserEntity(String username, String password, List<Role> roles) {
+   public UserEntity(String username, String password, String phoneNr, List<Role> roles) {
       super(null);
       this.username = username;
       this.password = password;
+      this.phoneNr= phoneNr;
       this.roles = new ArrayList<>(roles);
    }
 
