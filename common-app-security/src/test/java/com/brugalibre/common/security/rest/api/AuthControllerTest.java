@@ -1,5 +1,7 @@
 package com.brugalibre.common.security.rest.api;
 
+import com.brugalibre.common.rest.api.UserController;
+import com.brugalibre.common.rest.model.ChangeUserRequest;
 import com.brugalibre.common.security.auth.config.TestCommonAppSecurityConfig;
 import com.brugalibre.common.security.auth.register.UserRegisteredEvent;
 import com.brugalibre.common.security.auth.register.UserRegisteredObserver;
@@ -25,6 +27,9 @@ class AuthControllerTest {
 
    @Autowired
    private AuthController authController;
+
+   @Autowired
+   private UserController userController;
 
    @Autowired
    private UserRegisterService userRegisterService;
@@ -74,6 +79,30 @@ class AuthControllerTest {
       assertThat(userRegisteredObserver.actualPasswords.get(0), is(password));
 
       userRegisterService.removeUserRegisteredObserver(userRegisteredObserver);
+   }
+
+   @Test
+   void createAndChangeUser() {
+      // Given
+      String username = "hans";
+      String userPhoneNr = "0712223344";
+      String newPhoneNr = "0714445566";
+      String password = "1234";
+      RegisterRequest registerRequest = new RegisterRequest(username, password, userPhoneNr, List.of("USER"));
+
+      // When
+      authController.registerUser(registerRequest);
+      ChangeUserRequest changeUserRequest = new ChangeUserRequest(username, newPhoneNr);
+      userController.changeUser(changeUserRequest);
+
+      // Then
+      List<User> users = userRepository.getAll();
+      assertThat(users.size(), is(1));
+      assertThat(users.get(0).username(), is(username));
+      assertThat(users.get(0).phoneNr(), is(newPhoneNr));
+      org.springframework.security.core.userdetails.User securityUser = (org.springframework.security.core.userdetails.User) userDetailsService.loadUserByUsername(username);
+      assertThat(securityUser.getAuthorities().size(), is(1));
+      assertThat(new ArrayList<>(securityUser.getAuthorities()).get(0).getAuthority(), is(Role.USER.name()));
    }
 
    @Test

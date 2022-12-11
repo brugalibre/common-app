@@ -2,8 +2,8 @@ package com.brugalibre.common.security.rest.api;
 
 import com.brugalibre.common.security.rest.model.LoginRequest;
 import com.brugalibre.common.security.rest.model.LoginResponse;
-import com.brugalibre.common.security.rest.model.RegisterResponse;
 import com.brugalibre.common.security.rest.model.RegisterRequest;
+import com.brugalibre.common.security.rest.model.RegisterResponse;
 import com.brugalibre.common.security.rest.service.UserLoginService;
 import com.brugalibre.common.security.rest.service.UserRegisterService;
 import jakarta.validation.Valid;

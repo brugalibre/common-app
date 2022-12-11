@@ -29,6 +29,33 @@ public class UserRepository extends CommonDomainRepositoryImpl<User, UserEntity,
    }
 
    /**
+    * Updates the given phone-nr on the user with the given username
+    *
+    * @param username       the name of the user to update
+    * @param newPhoneNumber the new phone-nr to set
+    */
+   public void updatePhoneNr(String username, String newPhoneNumber) {
+      String validNewPhoneNumber = getNormalizedPhoneNr(newPhoneNumber);
+      validatePhoneNr(newPhoneNumber);
+      domainDao.updatePhoneNr(validNewPhoneNumber, username);
+   }
+
+   private void validatePhoneNr(String newPhoneNumber) {
+      if (phoneNumberValidator.isNotValid(newPhoneNumber)) {
+         // Still not valid -> probably contains invalid characters or phone-nr pattern does not match
+         throw new PhoneNrNotValidException("Phone-Nr '{}' is not valid!", newPhoneNumber);
+      }
+   }
+
+   private String getNormalizedPhoneNr(String newPhoneNumber) {
+      String validNewPhoneNumber = newPhoneNumber;
+      if (phoneNumberValidator.isNotValid(newPhoneNumber)) {
+         validNewPhoneNumber = phoneNumberValidator.normalizePhoneNumber(newPhoneNumber);
+      }
+      return validNewPhoneNumber;
+   }
+
+   /**
     * Finds an optional {@link User} by its username
     *
     * @param username the username

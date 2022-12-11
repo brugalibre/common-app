@@ -59,6 +59,7 @@ public class UserLoginService implements UserLoggedInNotifier {
       LOG.info("User '" + user.getId() + "' authenticated!");
       return new LoginResponse(user.getId(),
               user.getUsername(),
+              user.getPhoneNr(),
               accessToken,
               user.getRoles());
    }
