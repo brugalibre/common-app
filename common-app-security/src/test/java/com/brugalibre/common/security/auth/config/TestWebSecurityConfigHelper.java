@@ -10,11 +10,6 @@ public class TestWebSecurityConfigHelper implements WebSecurityConfigHelper{
    }
 
    @Override
-   public String getDefaultSuccessUrl() {
-      return "/";
-   }
-
-   @Override
    public String getLoginProcessingUrl() {
       return "/";
    }

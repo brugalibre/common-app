@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Configuration
 @EnableJpaRepositories(basePackageClasses = {UserDao.class})
 @EntityScan(basePackages = {"com.brugalibre.common.domain.persistence", "com.brugalibre.persistence"})
-@ComponentScan(basePackages = {"com.brugalibre.domain"})
+@ComponentScan(basePackages = {"com.brugalibre.domain", "com.brugalibre.common.rest"})
 public class CommonAppPersistenceConfig {
    // no-op
 }
