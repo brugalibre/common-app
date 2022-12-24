@@ -1,6 +1,6 @@
 package com.brugalibre.common.security.auth.register;
 
-import com.brugalibre.common.security.user.model.User;
+import com.brugalibre.domain.user.model.User;
 
 /**
  * The {@link UserRegisteredEvent} is an event which is fired everytime a new {@link User} is successfully registered
@@ -18,6 +18,6 @@ public record UserRegisteredEvent(String userId, String username, String phoneNr
     * @return a {@link UserRegisteredEvent}
     */
    public static UserRegisteredEvent of(User user, char[] password) {
-      return new UserRegisteredEvent(user.getId(), user.getUsername(), user.getPhoneNr(), password);
+      return new UserRegisteredEvent(user.getId(), user.username(), user.getMobilePhone().getPhoneNr(), password);
    }
 }

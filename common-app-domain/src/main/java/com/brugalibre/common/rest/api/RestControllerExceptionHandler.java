@@ -1,6 +1,6 @@
 package com.brugalibre.common.rest.api;
 
-import com.brugalibre.domain.user.repository.PhoneNrNotValidException;
+import com.brugalibre.domain.contactpoint.mobilephone.exception.PhoneNrNotValidException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 @ControllerAdvice
-public class UserControllerExceptionHandler {
+public class RestControllerExceptionHandler {
 
    @ExceptionHandler(MethodArgumentNotValidException.class)
    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {

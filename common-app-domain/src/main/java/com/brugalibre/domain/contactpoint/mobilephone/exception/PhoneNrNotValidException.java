@@ -1,4 +1,4 @@
-package com.brugalibre.domain.user.repository;
+package com.brugalibre.domain.contactpoint.mobilephone.exception;
 
 import com.brugalibre.common.domain.exception.CommonDomainException;
 

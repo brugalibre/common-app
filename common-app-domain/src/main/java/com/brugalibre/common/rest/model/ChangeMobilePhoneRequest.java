@@ -1,10 +1,9 @@
 package com.brugalibre.common.rest.model;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-public record ChangeUserRequest(@Valid String username,@Valid String newUserPhoneNr) {
+public record ChangeMobilePhoneRequest(@NotBlank String userId, @NotBlank String newUserPhoneNr) {
    // no-op
 }

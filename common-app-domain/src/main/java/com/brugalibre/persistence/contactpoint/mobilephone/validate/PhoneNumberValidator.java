@@ -1,6 +1,7 @@
-package com.brugalibre.persistence.user.validate;
+package com.brugalibre.persistence.contactpoint.mobilephone.validate;
 
 import static java.util.Objects.nonNull;
+import static java.util.Objects.requireNonNull;
 
 public class PhoneNumberValidator {
 
@@ -25,6 +26,7 @@ public class PhoneNumberValidator {
     * @return the normalized the phone-number
     */
    public String normalizePhoneNumber(String phoneNumber) {
+      requireNonNull(phoneNumber, "Phone-Nr must not be null!");
       return phoneNumber.replace("+", "00")
               .replace("(", "")
               .replace(")", "")
