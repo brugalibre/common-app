@@ -11,25 +11,18 @@ import java.util.List;
 public class User extends org.springframework.security.core.userdetails.User {
 
    private String id;
-   private final String phoneNr;
 
    public User(UserEntity userEntity) {
       super(userEntity.getUsername(), userEntity.getPassword(), mapRoles2GrantedAuthorities(userEntity.getRoles()));
       this.id = userEntity.getId();
-      this.phoneNr = userEntity.getPhoneNr();
    }
 
    public User(String username, String password, String phoneNr, List<Role> roles) {
       super(username, password, mapRoles2GrantedAuthorities(roles));
-      this.phoneNr = phoneNr;
    }
 
    public String getId() {
       return id;
-   }
-
-   public String getPhoneNr() {
-      return phoneNr;
    }
 
    /**

@@ -10,6 +10,7 @@ import com.brugalibre.common.security.rest.api.AuthController;
 import com.brugalibre.common.security.rest.model.LoginRequest;
 import com.brugalibre.common.security.rest.model.LoginResponse;
 import com.brugalibre.common.security.user.model.User;
+import com.brugalibre.domain.user.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,12 +31,14 @@ public class UserLoginService implements UserLoggedInNotifier {
 
    private static final Logger LOG = LoggerFactory.getLogger(AuthController.class);
 
+   private final UserRepository userRepository;
    private final AuthenticationManager authenticationManager;
    private final JwtUtils jwtUtils;
    private final List<UserLoggedInObserver> userLoggedInObservers;
 
-   public UserLoginService(AuthenticationManager authenticationManager, JwtUtils jwtUtils) {
+   public UserLoginService(UserRepository userRepository, AuthenticationManager authenticationManager, JwtUtils jwtUtils) {
       this.authenticationManager = authenticationManager;
+      this.userRepository = userRepository;
       this.jwtUtils = jwtUtils;
       this.userLoggedInObservers = new ArrayList<>();
    }
@@ -55,11 +58,12 @@ public class UserLoginService implements UserLoggedInNotifier {
       String accessToken = jwtUtils.generateJwtToken((UserDetails) authentication.getPrincipal());
 
       User user = (User) authentication.getPrincipal();
+      String phoneNr = getPhoneNr(user);
       notifyUserLoggedInObservers(user);
       LOG.info("User '" + user.getId() + "' authenticated!");
       return new LoginResponse(user.getId(),
               user.getUsername(),
-              user.getPhoneNr(),
+              phoneNr,
               accessToken,
               user.getRoles());
    }
@@ -84,4 +88,10 @@ public class UserLoginService implements UserLoggedInNotifier {
    public void addUserRegisteredObserver(UserLoggedInObserver userLoggedInObserver) {
       this.userLoggedInObservers.add(requireNonNull(userLoggedInObserver));
    }
+
+   private String getPhoneNr(User user) {
+      com.brugalibre.domain.user.model.User domainUser = userRepository.getById(user.getId());
+      return domainUser.getMobilePhone().getPhoneNr();
+   }
+
 }

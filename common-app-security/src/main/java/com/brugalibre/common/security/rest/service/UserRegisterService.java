@@ -9,7 +9,9 @@ import com.brugalibre.common.security.rest.api.UserAlreadyExistsException;
 import com.brugalibre.common.security.rest.model.RegisterRequest;
 import com.brugalibre.common.security.rest.model.RegisterResponse;
 import com.brugalibre.common.security.user.model.User;
+import com.brugalibre.common.security.user.repository.SanitizedRegisterUserRequest;
 import com.brugalibre.common.security.user.repository.UserDetailsServiceImpl;
+import com.brugalibre.domain.user.repository.UserRepository;
 import com.brugalibre.persistence.user.UserEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,12 +31,14 @@ public class UserRegisterService implements UserRegisteredNotifier {
 
    private static final Logger LOG = LoggerFactory.getLogger(UserRegisterService.class);
    private final UserDetailsServiceImpl userDetailsServiceImpl;
+   private final UserRepository userRepository;
    private final PasswordEncoder encoder;
    private final List<UserRegisteredObserver> userRegisteredObservers;
 
    @Autowired
-   public UserRegisterService(PasswordEncoder encoder, UserDetailsServiceImpl userDetailsServiceImpl) {
+   public UserRegisterService(UserDetailsServiceImpl userDetailsServiceImpl, PasswordEncoder encoder, UserRepository userRepository) {
       this.encoder = encoder;
+      this.userRepository = userRepository;
       this.userDetailsServiceImpl = userDetailsServiceImpl;
       this.userRegisteredObservers = new ArrayList<>();
    }
@@ -54,31 +58,32 @@ public class UserRegisterService implements UserRegisteredNotifier {
       }
 
       // Create new user's account
-      User user = createNewUser(registerRequest);
-      User persistedUser = userDetailsServiceImpl.save(user);
+      SanitizedRegisterUserRequest sanitizedRegisterUserRequest = new SanitizedRegisterUserRequest(registerRequest.username(), encoder.encode(registerRequest.password()), registerRequest.userPhoneNr(), registerRequest.roles());
+      User persistedUser = userDetailsServiceImpl.save(sanitizedRegisterUserRequest);
       notifyUserRegisteredObservers(persistedUser, registerRequest);
       LOG.info("User {} registered successfully", registerRequest.username());
       return new RegisterResponse("Registration successful!");
    }
 
-   private User createNewUser(RegisterRequest registerRequest) {
-      return new User(registerRequest.username(), encoder.encode(registerRequest.password()), registerRequest.userPhoneNr(), User.toRoles(registerRequest.roles()));
-   }
-
    private void notifyUserRegisteredObservers(User user, RegisterRequest registerRequest) {
       char[] passwordCopy = Arrays.copyOf(registerRequest.password().toCharArray(), registerRequest.password().length());
-      UserRegisteredEvent userRegisteredEvent = UserRegisteredEvent.of(user, passwordCopy);
-      this.userRegisteredObservers.forEach(notifyUserRegistered(user, userRegisteredEvent));
+      UserRegisteredEvent userRegisteredEvent = getUserRegisteredEvent(user, passwordCopy);
+      this.userRegisteredObservers.forEach(notifyUserRegistered(userRegisteredEvent));
       Arrays.fill(passwordCopy, '0');
    }
 
-   private Consumer<UserRegisteredObserver> notifyUserRegistered(User user, UserRegisteredEvent userRegisteredEvent) {
+   private UserRegisteredEvent getUserRegisteredEvent(User user, char[] passwordCopy) {
+      com.brugalibre.domain.user.model.User domainUser = userRepository.getById(user.getId());
+      return UserRegisteredEvent.of(domainUser, passwordCopy);
+   }
+
+   private Consumer<UserRegisteredObserver> notifyUserRegistered(UserRegisteredEvent userRegisteredEvent) {
       return userRegisteredObserver -> {
          try {
             userRegisteredObserver.userRegistered(userRegisteredEvent);
          } catch (Exception e) {
             LOG.error(TextFormatter.formatText("Exception while notifying observer {}. Rolling back user creation", new Object[]{userRegisteredObserver}), e);
-            this.userDetailsServiceImpl.delete(user.getId());
+            this.userDetailsServiceImpl.delete(userRegisteredEvent.userId());
             throw e;
          }
       };

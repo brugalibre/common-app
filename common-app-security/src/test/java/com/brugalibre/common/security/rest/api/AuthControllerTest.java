@@ -1,7 +1,7 @@
 package com.brugalibre.common.security.rest.api;
 
-import com.brugalibre.common.rest.api.UserController;
-import com.brugalibre.common.rest.model.ChangeUserRequest;
+import com.brugalibre.common.rest.api.mobilephone.MobilePhoneController;
+import com.brugalibre.common.rest.model.ChangeMobilePhoneRequest;
 import com.brugalibre.common.security.auth.config.TestCommonAppSecurityConfig;
 import com.brugalibre.common.security.auth.register.UserRegisteredEvent;
 import com.brugalibre.common.security.auth.register.UserRegisteredObserver;
@@ -29,7 +29,7 @@ class AuthControllerTest {
    private AuthController authController;
 
    @Autowired
-   private UserController userController;
+   private MobilePhoneController mobilePhoneController;
 
    @Autowired
    private UserRegisterService userRegisterService;
@@ -65,7 +65,7 @@ class AuthControllerTest {
       List<User> users = userRepository.getAll();
       assertThat(users.size(), is(1));
       assertThat(users.get(0).username(), is(username));
-      assertThat(users.get(0).phoneNr(), is(expectedPhoneNr));
+      assertThat(users.get(0).getMobilePhone().getPhoneNr(), is(expectedPhoneNr));
       org.springframework.security.core.userdetails.User securityUser = (org.springframework.security.core.userdetails.User) userDetailsService.loadUserByUsername(username);
       assertThat(securityUser.getAuthorities().size(), is(1));
       assertThat(new ArrayList<>(securityUser.getAuthorities()).get(0).getAuthority(), is(Role.USER.name()));
@@ -92,14 +92,15 @@ class AuthControllerTest {
 
       // When
       authController.registerUser(registerRequest);
-      ChangeUserRequest changeUserRequest = new ChangeUserRequest(username, newPhoneNr);
-      userController.changeUser(changeUserRequest);
+      User user = userRepository.getAll().get(0);
+      ChangeMobilePhoneRequest changeUserRequest = new ChangeMobilePhoneRequest(user.id(), newPhoneNr);
+      mobilePhoneController.changeMobilePhone(changeUserRequest);
 
       // Then
       List<User> users = userRepository.getAll();
       assertThat(users.size(), is(1));
       assertThat(users.get(0).username(), is(username));
-      assertThat(users.get(0).phoneNr(), is(newPhoneNr));
+      assertThat(users.get(0).getMobilePhone().getPhoneNr(), is(newPhoneNr));
       org.springframework.security.core.userdetails.User securityUser = (org.springframework.security.core.userdetails.User) userDetailsService.loadUserByUsername(username);
       assertThat(securityUser.getAuthorities().size(), is(1));
       assertThat(new ArrayList<>(securityUser.getAuthorities()).get(0).getAuthority(), is(Role.USER.name()));
