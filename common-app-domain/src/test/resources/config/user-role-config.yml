@@ -1,0 +1,7 @@
+userRoleConfigEntries:
+  - username: test-user
+    roles:
+    - ADMIN
+  - username: test-user2
+    roles:
+    - ADMIN

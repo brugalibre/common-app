@@ -14,7 +14,6 @@ import org.mapstruct.MappingTarget;
 @Mapper(uses = ContactPointEntityMapper.class)
 public interface UserEntityMapper extends CommonDomainModelMapper<User, UserEntity> {
 
-   @Mapping(target = "roles", ignore = true)
    @Override
    UserEntity map2DomainEntity(User user);
 
