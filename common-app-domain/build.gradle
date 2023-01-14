@@ -19,9 +19,7 @@ dependencies {
     api 'org.springframework.boot:spring-boot-starter-data-jpa:3.0.0'
     api 'org.springframework.boot:spring-boot-starter-validation:3.0.0'
     compileOnly 'org.springframework.boot:spring-boot-starter-web:3.0.0'
-    compileOnly 'org.slf4j:slf4j-api:2.0.5'
-
-    implementation group: 'org.yaml', name: 'snakeyaml', version: '1.30'
+    implementation group: 'com.brugalibre', name: 'common-app-util', version: '1.0.0-SNAPSHOT'
 
     testImplementation group: 'com.h2database', name: 'h2', version: '2.1.214'
     testImplementation group: 'org.mapstruct', name: 'mapstruct', version: '1.5.2.Final'

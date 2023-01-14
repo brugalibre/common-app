@@ -1,17 +1,27 @@
-package com.brugalibre.domain.file.service;
+package com.brugalibre.util.file.yml;
 
-import com.brugalibre.domain.file.util.FileUtil;
-import org.springframework.stereotype.Service;
+import com.brugalibre.util.file.FileUtil;
+import com.brugalibre.util.config.yml.YmlConfig;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.representer.Representer;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 
-@Service
 public class YamlService {
+
+   private final boolean ignoreMissingFile;
+
+   public YamlService(boolean ignoreMissingFile) {
+      this.ignoreMissingFile = ignoreMissingFile;
+   }
+
+   public YamlService() {
+      ignoreMissingFile = false;
+   }
 
    /**
     * Loads the given yml file and create a new class with the content
@@ -21,13 +31,27 @@ public class YamlService {
     * @param clazz   type of the class to create
     * @return a new instance of the given class, with the content of the given yml-file
     */
-   public <T> T readYaml(String ymlFile, Class<T> clazz) {
+   public <T extends YmlConfig> T readYaml(String ymlFile, Class<T> clazz) {
       Representer representer = createRepresenter();
       Yaml yaml = new Yaml(new Constructor(clazz), representer);
       try (InputStream inputStream = FileUtil.getInputStream(ymlFile)) {
          return yaml.load(inputStream);
+      } catch (FileNotFoundException e) {
+         if (ignoreMissingFile) {
+            return createEmptyConfig(clazz);
+         }
+         throw new IllegalStateException(e);
       } catch (IOException e) {
          throw new IllegalStateException(e);
+      }
+   }
+
+   private <T extends YmlConfig> T createEmptyConfig(Class<T> clazz) {
+      try {
+         return clazz.getConstructor().newInstance();
+      } catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+         e.printStackTrace();
+         throw new IllegalStateException("Not possible to create empty config instance!", e);
       }
    }
 
@@ -40,7 +64,7 @@ public class YamlService {
     * @param clazz   type of the class to create
     * @return a new instance of the given class, with the content of the given yml-file
     */
-   public <T> T readYamlIgnoreMissingFile(String ymlFile, Class<T> clazz) {
+   public <T extends YmlConfig> T readYamlIgnoreMissingFile(String ymlFile, Class<T> clazz) {
       try {
          return readYaml(ymlFile, clazz);
       } catch (Exception e) {
@@ -51,7 +75,6 @@ public class YamlService {
          }
       }
    }
-
 
    private static Representer createRepresenter() {
       Representer representer = new Representer();

@@ -1,4 +1,5 @@
 rootProject.name = 'common-app'
 include 'common-app-security'
 include 'common-app-domain'
+include 'common-app-util'
 

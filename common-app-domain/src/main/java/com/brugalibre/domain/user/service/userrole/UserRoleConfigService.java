@@ -1,10 +1,10 @@
 package com.brugalibre.domain.user.service.userrole;
 
-import com.brugalibre.domain.file.service.YamlService;
 import com.brugalibre.domain.user.model.User;
 import com.brugalibre.domain.user.repository.UserRepository;
 import com.brugalibre.domain.user.service.UserRoleService;
 import com.brugalibre.persistence.user.Role;
+import com.brugalibre.util.file.yml.YamlService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +22,10 @@ public class UserRoleConfigService {
    private final String configuredUserRolesConfigFile;
 
    @Autowired
-   public UserRoleConfigService(UserRoleService userRoleService, UserRepository userRepository, YamlService yamlService) {
+   public UserRoleConfigService(UserRoleService userRoleService, UserRepository userRepository) {
       this.userRoleService = userRoleService;
       this.userRepository = userRepository;
-      this.yamlService = yamlService;
+      this.yamlService = new YamlService(true);
       this.configuredUserRolesConfigFile = UserRoleConfig.PATH_TO_CONFIGURED_USER_ROLES;
    }
 

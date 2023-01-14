@@ -1,0 +1,19 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+apply from: '../test.gradle'
+apply from: '../common-app.gradle'
+
+version '1.0.0-SNAPSHOT'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+
+    implementation group: 'org.yaml', name: 'snakeyaml', version: '1.30'
+}
