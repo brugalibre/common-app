@@ -1,0 +1,26 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id "java-test-fixtures"
+}
+
+apply from: '../test.gradle'
+apply from: '../common-app.gradle'
+
+version '1.0.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    api 'com.squareup.okhttp3:okhttp:4.10.0'
+    api group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.5'
+
+    testImplementation group: 'org.mock-server', name: 'mockserver-netty', version: '5.11.2'
+}
+
+test {
+    useJUnitPlatform()
+}
