@@ -16,4 +16,5 @@ repositories {
 dependencies {
 
     implementation group: 'org.yaml', name: 'snakeyaml', version: '1.30'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.5'
 }
