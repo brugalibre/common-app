@@ -1,0 +1,17 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+apply from: '../test.gradle'
+apply from: '../common-app.gradle'
+
+version '1.0.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    api group: 'org.mock-server', name: 'mockserver-netty', version: '5.11.2'
+}

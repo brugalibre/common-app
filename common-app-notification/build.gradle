@@ -1,7 +1,6 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id "java-test-fixtures"
 }
 
 apply from: '../test.gradle'
@@ -10,9 +9,19 @@ apply from: '../common-app.gradle'
 version '1.0.0-SNAPSHOT'
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
 dependencies {
 
+    implementation group: 'com.brugalibre', name: 'common-app-util', version: '1.0.0-SNAPSHOT'
+
+    implementation group: 'com.messagebird', name: 'messagebird-api', version: '3.2.1'
+    implementation 'org.glassfish.jersey.media:jersey-media-json-jackson:3.1.0'
+    implementation 'org.glassfish.jersey.core:jersey-client:3.1.0'
+    implementation 'org.glassfish.jersey.inject:jersey-hk2:3.1.0'
+    implementation group: 'jakarta.activation', name: 'jakarta.activation-api', version: '2.1.0'
+
+    testImplementation group: 'com.brugalibre', name: 'common-app-test', version: '1.0.0-SNAPSHOT'
 }

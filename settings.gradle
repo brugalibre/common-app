@@ -3,4 +3,4 @@ include 'common-app-security'
 include 'common-app-domain'
 include 'common-app-util'
 include 'common-app-http'
-
+include 'common-app-notification'
