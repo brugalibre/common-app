@@ -35,7 +35,9 @@ public class YamlService {
       Representer representer = createRepresenter();
       Yaml yaml = new Yaml(new Constructor(clazz), representer);
       try (InputStream inputStream = FileUtil.getInputStream(ymlFile)) {
-         return yaml.load(inputStream);
+         T ymlConfig = yaml.load(inputStream);
+         ymlConfig.setConfigFile(ymlFile);
+         return ymlConfig;
       } catch (FileNotFoundException e) {
          if (ignoreMissingFile) {
             return createEmptyConfig(clazz);

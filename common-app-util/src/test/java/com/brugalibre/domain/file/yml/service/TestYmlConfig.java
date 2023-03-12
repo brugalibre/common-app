@@ -19,6 +19,11 @@ public class TestYmlConfig implements YmlConfig {
       return this;
    }
 
+   @Override
+   public void setConfigFile(String configFile) {
+      // ignore
+   }
+
    public List<String> getSomeList() {
       return someList;
    }
