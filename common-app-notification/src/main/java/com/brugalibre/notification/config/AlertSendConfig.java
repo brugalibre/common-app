@@ -78,4 +78,9 @@ public class AlertSendConfig implements YmlConfig {
    public YmlConfig refresh() {
       return this;
    }
+
+   @Override
+   public void setConfigFile(String alertSendConfigFile) {
+      // unused
+   }
 }
