@@ -2,6 +2,8 @@ package com.brugalibre.domain.user.service.userrole;
 
 import com.brugalibre.persistence.user.Role;
 import com.brugalibre.util.config.yml.YmlConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,6 +12,7 @@ import java.util.stream.Collectors;
 
 public class UserRoleConfig implements YmlConfig {
 
+   private static final Logger LOG = LoggerFactory.getLogger(UserRoleConfig.class);
    public static final String PATH_TO_CONFIGURED_USER_ROLES = "config/user-role-config.yml";
    private List<UserRoleConfigEntry> userRoleConfigEntries;
 
@@ -41,6 +44,12 @@ public class UserRoleConfig implements YmlConfig {
    @Override
    public YmlConfig refresh() {
       return this;
+   }
+
+   @Override
+   public void setConfigFile(String configFile) {
+      // no-op
+      LOG.error("Unsupported call 'setConfigFile'!");
    }
 
    @Override
