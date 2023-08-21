@@ -54,6 +54,10 @@ public class DummyHttpServerTestCaseBuilder {
       clientServer.openUI(TimeUnit.MINUTES, 60);
    }
 
+   public void stop() {
+      clientServer.stop();
+   }
+
    public static final class HttpRequestResponseBuilder {
 
       private final DummyHttpServerTestCaseBuilder dummyHttpServerTestCaseBuilder;
