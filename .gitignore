@@ -1,6 +1,7 @@
 # From https://github.com/github/gitignore/blob/master/Gradle.gitignore
 .gradle
-.idea/*
+.idea
+.idea/
 /build/
 /data/
 /logs/

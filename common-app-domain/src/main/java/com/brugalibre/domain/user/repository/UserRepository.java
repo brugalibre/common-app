@@ -29,4 +29,24 @@ public class UserRepository extends CommonDomainRepositoryImpl<User, UserEntity,
       return domainDao.findByUsername(username)
               .map(domainModelMapper::map2DomainModel);
    }
+
+    /**
+     * Changes the {@link User}s password
+     *
+     * @param newPassword the new password value to set
+     * @param userId      the id of the User whose password has to be changed
+     */
+    public void changePassword(String newPassword, String userId) {
+        domainDao.setPassword(newPassword, userId);
+    }
+
+    /**
+     * Changes the {@link User}s username
+     *
+     * @param newUsername the new username value to set
+     * @param userId      the id of the User whose name has to be changed
+     */
+    public void changeUsername(String newUsername, String userId) {
+        domainDao.setUsername(newUsername, userId);
+    }
 }

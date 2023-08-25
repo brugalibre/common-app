@@ -1,6 +1,5 @@
 package com.brugalibre.common.security.rest.service;
 
-import com.brugalibre.common.domain.text.TextFormatter;
 import com.brugalibre.common.security.auth.register.UserRegisteredEvent;
 import com.brugalibre.common.security.auth.register.UserRegisteredNotifier;
 import com.brugalibre.common.security.auth.register.UserRegisteredObserver;
@@ -13,6 +12,7 @@ import com.brugalibre.common.security.user.repository.SanitizedRegisterUserReque
 import com.brugalibre.common.security.user.repository.UserDetailsServiceImpl;
 import com.brugalibre.domain.user.repository.UserRepository;
 import com.brugalibre.persistence.user.UserEntity;
+import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Consumer;
 
 import static java.util.Objects.requireNonNull;
 
@@ -51,6 +50,7 @@ public class UserRegisterService implements UserRegisteredNotifier {
     * @return a {@link RegisterResponse} with a message describing the result
     * @throws UserAlreadyExistsException if there exists already a {@link UserEntity} for the same username as in the given {@link RegisterRequest}
     */
+   @Transactional
    public RegisterResponse registerUser(RegisterRequest registerRequest) {
       if (userDetailsServiceImpl.existsUserByUsername(registerRequest.username())) {
          LOG.error("Registration failed! Username {} already taken", registerRequest.username());
@@ -62,31 +62,19 @@ public class UserRegisterService implements UserRegisteredNotifier {
       User persistedUser = userDetailsServiceImpl.save(sanitizedRegisterUserRequest);
       notifyUserRegisteredObservers(persistedUser, registerRequest);
       LOG.info("User {} registered successfully", registerRequest.username());
-      return new RegisterResponse("Registration successful!");
+      return new RegisterResponse(TextResources.REGISTRATION_SUCCESSFUL);
    }
 
    private void notifyUserRegisteredObservers(User user, RegisterRequest registerRequest) {
       char[] passwordCopy = Arrays.copyOf(registerRequest.password().toCharArray(), registerRequest.password().length());
       UserRegisteredEvent userRegisteredEvent = getUserRegisteredEvent(user, passwordCopy);
-      this.userRegisteredObservers.forEach(notifyUserRegistered(userRegisteredEvent));
+      this.userRegisteredObservers.forEach(userRegisteredObserver -> userRegisteredObserver.userRegistered(userRegisteredEvent));
       Arrays.fill(passwordCopy, '0');
    }
 
    private UserRegisteredEvent getUserRegisteredEvent(User user, char[] passwordCopy) {
       com.brugalibre.domain.user.model.User domainUser = userRepository.getById(user.getId());
       return UserRegisteredEvent.of(domainUser, passwordCopy);
-   }
-
-   private Consumer<UserRegisteredObserver> notifyUserRegistered(UserRegisteredEvent userRegisteredEvent) {
-      return userRegisteredObserver -> {
-         try {
-            userRegisteredObserver.userRegistered(userRegisteredEvent);
-         } catch (Exception e) {
-            LOG.error(TextFormatter.formatText("Exception while notifying observer {}. Rolling back user creation", new Object[]{userRegisteredObserver}), e);
-            this.userDetailsServiceImpl.delete(userRegisteredEvent.userId());
-            throw e;
-         }
-      };
    }
 
    @Override

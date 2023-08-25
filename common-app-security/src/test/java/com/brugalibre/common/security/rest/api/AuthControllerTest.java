@@ -107,7 +107,26 @@ class AuthControllerTest {
    }
 
    @Test
-   void registerUser() {
+   void registerUserWithExceptionFromObserver() {
+      // Given
+      String username = "peter";
+      String userPhoneNr = "0712223344";
+      String password = "4321";
+      RegisterRequest registerRequest = new RegisterRequest(username, password, userPhoneNr, List.of("USER"));
+      ExceptionThrowingObserver exceptionThrowingObserver = new ExceptionThrowingObserver();
+      userRegisterService.addUserRegisteredObserver(exceptionThrowingObserver);
+
+      // When
+      try {
+         authController.registerUser(registerRequest);
+      } catch (IllegalStateException e) {
+         //ignore
+      }
+
+      // Then
+      List<User> users = userRepository.getAll();
+      assertThat(users.size(), is(0));
+      userRegisterService.removeUserRegisteredObserver(exceptionThrowingObserver);
    }
 
    public static class TestUserRegisteredObserver implements UserRegisteredObserver {
@@ -123,6 +142,13 @@ class AuthControllerTest {
       public void userRegistered(UserRegisteredEvent userRegisteredEvent) {
          userRegisteredEvents.add(userRegisteredEvent);
          actualPasswords.add(String.valueOf(userRegisteredEvent.password()));
+      }
+   }
+
+   private static class ExceptionThrowingObserver implements UserRegisteredObserver {
+      @Override
+      public void userRegistered(UserRegisteredEvent userRegisteredEvent) {
+         throw new IllegalStateException();
       }
    }
 }
