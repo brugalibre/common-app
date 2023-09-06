@@ -1,5 +1,6 @@
 package com.brugalibre.notification.config;
 
+import com.brugalibre.notification.api.v1.alerttype.AlertType;
 import com.brugalibre.util.config.yml.YmlConfig;
 
 import java.util.ArrayList;
@@ -9,27 +10,37 @@ import java.util.function.Supplier;
 import static java.util.Objects.isNull;
 
 public class AlertSendConfig implements YmlConfig {
-   private String originatorName;
    private Supplier<char[]> apiKeyProvider;
    private String alertServiceName;
    private String username;
    private String originator;
+   private int originatorMailId;
+   private List<AlertType> alertTypes;
    private List<String> onApplicationErrorReceivers;
 
    public AlertSendConfig() {
       this.apiKeyProvider = ""::toCharArray;
+      this.alertTypes = List.of(AlertType.SMS);// default is sms
+   }
+
+   public int getOriginatorMailId() {
+      return originatorMailId;
+   }
+
+   public void setOriginatorMailId(int originatorMailId) {
+      this.originatorMailId = originatorMailId;
+   }
+
+   public List<AlertType> getAlertTypes() {
+      return alertTypes;
+   }
+
+   public void setAlertTypes(List<AlertType> alertTypes) {
+      this.alertTypes = alertTypes;
    }
 
    public String getUsername() {
       return username;
-   }
-
-   public String getOriginatorName() {
-      return originatorName;
-   }
-
-   public void setOriginatorName(String originatorName) {
-      this.originatorName = originatorName;
    }
 
    public String getAlertServiceName() {
