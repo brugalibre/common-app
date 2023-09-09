@@ -1,6 +1,6 @@
 package com.brugalibre.common.http.service.response;
 
-import com.brugalibre.common.http.model.response.HttpResponse;
+import com.brugalibre.common.http.model.response.ResponseWrapper;
 import com.brugalibre.common.http.service.HttpService;
 import okhttp3.Response;
 
@@ -8,27 +8,27 @@ import java.io.IOException;
 
 /**
  * The {@link ResponseReader} reads the json response the {@link HttpService} has received and maps
- * it in any subtype of {@link HttpResponse}
+ * it into a {@link ResponseWrapper}
  *
  * @author Dominic
  */
-public interface ResponseReader<T extends HttpResponse> {
+public interface ResponseReader<T> {
 
    /**
-    * Reads the given {@link ResponseReader} and maps it into a {@link HttpResponse}
+    * Reads the given {@link ResponseReader} and maps it into a {@link ResponseWrapper}
     *
     * @param response the Response to read
-    * @return the {@link HttpResponse} as a parsed result
+    * @return the {@link ResponseWrapper} which contains the parsed result as well as some status value about the success
     * @throws IOException an {@link IOException} thrown by {@link okhttp3.OkHttp}
     */
-   T readResponse(Response response) throws IOException;
+   ResponseWrapper<T> readResponse(Response response) throws IOException;
 
    /**
     * Creates an error response which contains further information about the failed call
     *
     * @param e   the exception which occurred
     * @param url the url which was posted in order to get a result
-    * @return an error response which contains further information about the failed call
+    * @return an error response which contains further information about the failed call, wrapped in a {@link ResponseWrapper}
     */
-   T createErrorResponse(Exception e, String url);
+   ResponseWrapper<T> createErrorResponse(Exception e, String url);
 }
