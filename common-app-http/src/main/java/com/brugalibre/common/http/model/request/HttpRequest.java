@@ -11,4 +11,7 @@ public record HttpRequest(HttpMethod httpMethod, String jsonBody, String url) {
    public static HttpRequest getHttpPostRequest(String jsonBody, String url) {
       return new HttpRequest(HttpMethod.POST, jsonBody, url);
    }
+   public static HttpRequest getHttpRequest(HttpMethod httpMethod, String jsonBody, String url) {
+      return new HttpRequest(httpMethod, jsonBody, url);
+   }
 }
