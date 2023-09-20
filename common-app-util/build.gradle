@@ -6,7 +6,7 @@ plugins {
 apply from: '../test.gradle'
 apply from: '../common-app.gradle'
 
-version '1.0.1-SNAPSHOT'
+version '1.0.2-SNAPSHOT'
 
 repositories {
     mavenLocal()
@@ -17,4 +17,7 @@ dependencies {
 
     implementation group: 'org.yaml', name: 'snakeyaml', version: '1.30'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.5'
+
+    // https://mvnrepository.com/artifact/org.awaitility/awaitility
+    testImplementation group: 'org.awaitility', name: 'awaitility', version: '3.0.0'
 }
