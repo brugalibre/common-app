@@ -1,5 +1,7 @@
 package com.brugalibre.persistence.user.dao;
 
+import com.brugalibre.domain.contactpoint.ContactPointType;
+import com.brugalibre.domain.contactpoint.model.ContactPoint;
 import com.brugalibre.domain.user.model.User;
 import com.brugalibre.persistence.user.UserEntity;
 import org.springframework.data.jpa.repository.Modifying;
@@ -17,6 +19,18 @@ public interface UserDao extends CrudRepository<UserEntity, String> {
     * @return an {@link Optional} of an {@link UserEntity}
     */
    Optional<UserEntity> findByUsername(String username);
+
+    /**
+     * Finds a {@link UserEntity} which has a {@link ContactPoint} with type {@link ContactPointType#MOBILE_PHONE}
+     * which has de given phone-nr
+     *
+     * @param phoneNr the phone-nr
+     * @return an {@link Optional} containing the found {@link UserEntity} or an empty optional if there is none for the given phone-nr
+     */
+    @Query("SELECT cp.user FROM UserEntity user JOIN user.contactPoints cp " +
+            "WHERE cp.contactPointType = MOBILE_PHONE " +
+            "AND cp.phoneNr = ?1")
+    Optional<UserEntity> findByPhoneNr(String phoneNr);
 
     /**
      * Changes the {@link User}s password

@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Optional;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -41,6 +43,46 @@ class UserRepositoryTest {
       // Then
       assertThat(savedUser.username(), is(username));
       assertThat(savedUser.getMobilePhone().getPhoneNr(), is(expectedPhoneNur));
+   }
+
+   @Test
+   void testCreateAndLoadUserEntityWithPhoneNumber_PersistedPhoneNumberWithoutCountryCode() {
+      // Given
+      String theRightPhoneNrToStore = "078 987 65 43";
+      String theRightPhoneNrToLoad = "+41 (78) 987 65 43";
+      String otherUsername = "jack1";
+      String theRightUsername = "jack2";
+      User theRightUser = User.of(theRightUsername, "5ds", MobilePhone.of(theRightPhoneNrToStore));
+      userRepository.save(theRightUser);
+
+      // When
+      Optional<User> optUserByPhoneNr = userRepository.findByPhoneNr(theRightPhoneNrToLoad);
+
+      // Then
+      assertThat(optUserByPhoneNr.isPresent(), is(true));
+      User userByPhoneNr = optUserByPhoneNr.get();
+      assertThat(userByPhoneNr.username(), is(theRightUsername));
+   }
+
+   @Test
+   void testCreateTwoUsersAndLoadOneWithPhoneNumber() {
+      // Given
+      String otherPhoneNr = "+41 (78) 123 12 00";
+      String theRightPhoneNr = "+41 (78) 987 65 43";
+      String otherUsername = "jack1";
+      String theRightUsername = "jack2";
+      User otherUser = User.of(otherUsername, "def1", MobilePhone.of(otherPhoneNr));
+      User theRightUser = User.of(theRightUsername, "5ds", MobilePhone.of(theRightPhoneNr));
+      userRepository.save(otherUser);
+      userRepository.save(theRightUser);
+
+      // When
+      Optional<User> optUserByPhoneNr = userRepository.findByPhoneNr(theRightPhoneNr);
+
+      // Then
+      assertThat(optUserByPhoneNr.isPresent(), is(true));
+      User userByPhoneNr = optUserByPhoneNr.get();
+      assertThat(userByPhoneNr.username(), is(theRightUsername));
    }
 
    @Test
