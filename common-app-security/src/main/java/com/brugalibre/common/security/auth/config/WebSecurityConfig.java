@@ -81,6 +81,7 @@ public class WebSecurityConfig {
               .requestMatchers(WEB_RESOURCES).permitAll()
               .requestMatchers(ALWAYS_AUTHORIZED_RESOURCES).permitAll()
               .requestMatchers("/api/auth/**").permitAll()
+              .requestMatchers(webSecurityConfigHelper.getOptionalPermittedPatterns()).permitAll()
               .requestMatchers(webSecurityConfigHelper.getRequestMatcherForRole(Role.USER.name())).hasAuthority(Role.USER.name())
               .requestMatchers(webSecurityConfigHelper.getRequestMatcherForRole(Role.ADMIN.name())).hasAuthority(Role.ADMIN.name())
               .requestMatchers(contextPath).permitAll()  // grant access to staging area-> web-router can re route  to login

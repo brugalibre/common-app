@@ -17,4 +17,11 @@ public interface WebSecurityConfigHelper {
     * @return the url for processing the login
     */
    String getLoginProcessingUrl();
+
+   /**
+    * @return a String array of patterns which are permitted by default
+    */
+   default String[] getOptionalPermittedPatterns() {
+      return new String[0];
+   }
 }
