@@ -2,11 +2,16 @@ package com.brugalibre.domain.user.service.userrole;
 
 import com.brugalibre.persistence.user.Role;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserRoleConfigEntry {
    private String username;
    private List<Role> roles;
+
+   public UserRoleConfigEntry() {
+      this.roles = new ArrayList<>();
+   }
 
    public String getUsername() {
       return username;
