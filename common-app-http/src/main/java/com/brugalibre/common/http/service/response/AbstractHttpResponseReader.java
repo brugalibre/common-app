@@ -29,7 +29,7 @@ public abstract class AbstractHttpResponseReader<T> implements ResponseReader<T>
       ObjectMapper objectMapper = getObjectMapper();
       T httpResponse = readValue(bodyAsString, objectMapper);
       LOG.info("Got response {}, with body {}", response, bodyAsString);
-      return ResponseWrapper.of(httpResponse, response.isSuccessful());
+      return ResponseWrapper.of(httpResponse, response.code());
    }
 
    protected T readValue(String bodyAsString, ObjectMapper objectMapper) throws JsonProcessingException {
