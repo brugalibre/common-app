@@ -68,14 +68,21 @@ public class DummyHttpServerTestCaseBuilder {
       private HttpResponse httpResponse;
       private Header header;
       private String requestBody;
+      private HttpStatusCode httpStatusCode;
 
       public HttpRequestResponseBuilder(String path, DummyHttpServerTestCaseBuilder dummyHttpServerTestCaseBuilder) {
          this.path = path;
+         this.httpStatusCode = HttpStatusCode.OK_200;
          this.dummyHttpServerTestCaseBuilder = dummyHttpServerTestCaseBuilder;
       }
 
       public HttpRequestResponseBuilder withMethod(String method) {
          this.method = method;
+         return this;
+      }
+
+      public HttpRequestResponseBuilder withHttpStatusCode(HttpStatusCode httpStatusCode) {
+         this.httpStatusCode = httpStatusCode;
          return this;
       }
 
@@ -102,7 +109,7 @@ public class DummyHttpServerTestCaseBuilder {
                  .withHeader(header);
 
          httpResponse = new HttpResponse()
-                 .withStatusCode(HttpStatusCode.OK_200.code())
+                 .withStatusCode(httpStatusCode.code())
                  .withBody(responseBody);
          this.dummyHttpServerTestCaseBuilder.add(this);
          return dummyHttpServerTestCaseBuilder;
