@@ -1,4 +1,4 @@
-package com.brugalibre.domain.user.service.userrole;
+package com.brugalibre.domain.user.model.userrole;
 
 import com.brugalibre.persistence.user.Role;
 import com.brugalibre.util.config.yml.YmlConfig;
@@ -49,7 +49,7 @@ public class UserRoleConfig implements YmlConfig {
    @Override
    public void setConfigFile(String configFile) {
       // no-op
-      LOG.error("Unsupported call 'setConfigFile'!");
+      LOG.warn("Unsupported call 'setConfigFile'!");
    }
 
    @Override

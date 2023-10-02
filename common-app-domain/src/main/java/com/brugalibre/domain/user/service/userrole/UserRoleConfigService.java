@@ -1,6 +1,7 @@
 package com.brugalibre.domain.user.service.userrole;
 
 import com.brugalibre.domain.user.model.User;
+import com.brugalibre.domain.user.model.userrole.UserRoleConfig;
 import com.brugalibre.domain.user.repository.UserRepository;
 import com.brugalibre.domain.user.service.UserRoleService;
 import com.brugalibre.persistence.user.Role;

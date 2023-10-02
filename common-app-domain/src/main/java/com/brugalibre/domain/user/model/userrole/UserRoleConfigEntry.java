@@ -1,4 +1,4 @@
-package com.brugalibre.domain.user.service.userrole;
+package com.brugalibre.domain.user.model.userrole;
 
 import com.brugalibre.persistence.user.Role;
 
