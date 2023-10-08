@@ -41,7 +41,7 @@ public class AuthController {
       return ResponseEntity.ok(registerResponse);
    }
 
-   @PostMapping("/changePassword")
+   @PutMapping("/changedPassword")
    public ResponseEntity<?> changePassword(@Valid @RequestBody UserPasswordChangeRequest userPasswordChangeRequest) {
       UserPasswordChangeResponse userPasswordChangeResponse = userPasswordChangeService.changeUserPassword(userPasswordChangeRequest);
       return ResponseEntity.ok(userPasswordChangeResponse);
