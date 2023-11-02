@@ -1,11 +1,14 @@
-package com.brugalibre.common.security.rest.api;
+package com.brugalibre.common.security.rest;
 
-import com.brugalibre.common.security.rest.model.*;
-import com.brugalibre.common.security.rest.model.passwordchange.UserPasswordChangeRequest;
-import com.brugalibre.common.security.rest.model.passwordchange.UserPasswordChangeResponse;
-import com.brugalibre.common.security.rest.service.UserLoginService;
-import com.brugalibre.common.security.rest.service.passwordchange.UserUserPasswordChangeService;
-import com.brugalibre.common.security.rest.service.UserRegisterService;
+import com.brugalibre.common.security.user.model.login.LoginRequest;
+import com.brugalibre.common.security.user.model.login.LoginResponse;
+import com.brugalibre.common.security.user.model.passwordchange.UserPasswordChangeRequest;
+import com.brugalibre.common.security.user.model.passwordchange.UserPasswordChangeResponse;
+import com.brugalibre.common.security.user.service.login.UserLoginService;
+import com.brugalibre.common.security.user.service.passwordchange.UserUserPasswordChangeService;
+import com.brugalibre.common.security.user.model.register.RegisterRequest;
+import com.brugalibre.common.security.user.model.register.RegisterResponse;
+import com.brugalibre.common.security.user.service.register.UserRegisterService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

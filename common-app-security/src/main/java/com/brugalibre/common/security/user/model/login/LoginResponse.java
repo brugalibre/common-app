@@ -1,4 +1,4 @@
-package com.brugalibre.common.security.rest.model;
+package com.brugalibre.common.security.user.model.login;
 
 import com.brugalibre.persistence.user.Role;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;

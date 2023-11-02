@@ -1,4 +1,4 @@
-package com.brugalibre.common.security.rest.service;
+package com.brugalibre.common.security.user.service.login;
 
 import com.brugalibre.common.domain.text.TextFormatter;
 import com.brugalibre.common.security.auth.JwtUtils;
@@ -6,9 +6,9 @@ import com.brugalibre.common.security.auth.login.UserLoggedInEvent;
 import com.brugalibre.common.security.auth.login.UserLoggedInNotifier;
 import com.brugalibre.common.security.auth.login.UserLoggedInObserver;
 import com.brugalibre.common.security.auth.register.UserRegisteredObserver;
-import com.brugalibre.common.security.rest.api.AuthController;
-import com.brugalibre.common.security.rest.model.LoginRequest;
-import com.brugalibre.common.security.rest.model.LoginResponse;
+import com.brugalibre.common.security.rest.AuthController;
+import com.brugalibre.common.security.user.model.login.LoginRequest;
+import com.brugalibre.common.security.user.model.login.LoginResponse;
 import com.brugalibre.common.security.user.model.User;
 import com.brugalibre.domain.user.repository.UserRepository;
 import org.slf4j.Logger;

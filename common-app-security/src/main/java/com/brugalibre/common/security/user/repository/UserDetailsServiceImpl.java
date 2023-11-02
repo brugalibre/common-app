@@ -1,7 +1,6 @@
 package com.brugalibre.common.security.user.repository;
 
 
-import com.brugalibre.common.security.rest.model.RegisterRequest;
 import com.brugalibre.common.security.user.model.User;
 import com.brugalibre.persistence.contactpoint.ContactPointEntity;
 import com.brugalibre.persistence.contactpoint.mobilephone.MobilePhoneEntity;

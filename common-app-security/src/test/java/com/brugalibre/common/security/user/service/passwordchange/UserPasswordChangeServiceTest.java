@@ -1,12 +1,11 @@
-package com.brugalibre.common.security.rest.service;
+package com.brugalibre.common.security.user.service.passwordchange;
 
 import com.brugalibre.common.security.auth.config.TestCommonAppSecurityConfig;
 import com.brugalibre.common.security.auth.passwordchange.UserPasswordChangedEvent;
 import com.brugalibre.common.security.auth.passwordchange.UserPasswordChangedObserver;
-import com.brugalibre.common.security.rest.api.AuthController;
-import com.brugalibre.common.security.rest.model.RegisterRequest;
-import com.brugalibre.common.security.rest.model.passwordchange.UserPasswordChangeRequest;
-import com.brugalibre.common.security.rest.service.passwordchange.UserUserPasswordChangeService;
+import com.brugalibre.common.security.rest.AuthController;
+import com.brugalibre.common.security.user.model.passwordchange.UserPasswordChangeRequest;
+import com.brugalibre.common.security.user.model.register.RegisterRequest;
 import com.brugalibre.common.security.user.repository.UserDetailsServiceImpl;
 import com.brugalibre.domain.user.model.User;
 import com.brugalibre.domain.user.repository.UserRepository;

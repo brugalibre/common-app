@@ -1,4 +1,4 @@
-package com.brugalibre.common.security.rest.model.passwordchange;
+package com.brugalibre.common.security.user.model.passwordchange;
 
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;

@@ -1,4 +1,4 @@
-package com.brugalibre.common.security.rest.model;
+package com.brugalibre.common.security.user.model.register;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import jakarta.validation.constraints.NotNull;

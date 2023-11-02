@@ -1,11 +1,11 @@
-package com.brugalibre.common.security.rest.service.passwordchange;
+package com.brugalibre.common.security.user.service.passwordchange;
 
 import com.brugalibre.common.security.auth.passwordchange.UserPasswordChangedEvent;
 import com.brugalibre.common.security.auth.passwordchange.UserPasswordChangedNotifier;
 import com.brugalibre.common.security.auth.passwordchange.UserPasswordChangedObserver;
 import com.brugalibre.common.security.i18n.TextResources;
-import com.brugalibre.common.security.rest.model.passwordchange.UserPasswordChangeRequest;
-import com.brugalibre.common.security.rest.model.passwordchange.UserPasswordChangeResponse;
+import com.brugalibre.common.security.user.model.passwordchange.UserPasswordChangeRequest;
+import com.brugalibre.common.security.user.model.passwordchange.UserPasswordChangeResponse;
 import com.brugalibre.domain.user.service.UserService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;

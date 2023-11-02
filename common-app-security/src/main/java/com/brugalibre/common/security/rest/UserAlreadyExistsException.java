@@ -1,4 +1,4 @@
-package com.brugalibre.common.security.rest.api;
+package com.brugalibre.common.security.rest;
 
 public class UserAlreadyExistsException extends RuntimeException {
    public UserAlreadyExistsException(String message) {

@@ -1,12 +1,12 @@
-package com.brugalibre.common.security.rest.service;
+package com.brugalibre.common.security.user.service.register;
 
 import com.brugalibre.common.security.auth.register.UserRegisteredEvent;
 import com.brugalibre.common.security.auth.register.UserRegisteredNotifier;
 import com.brugalibre.common.security.auth.register.UserRegisteredObserver;
 import com.brugalibre.common.security.i18n.TextResources;
-import com.brugalibre.common.security.rest.api.UserAlreadyExistsException;
-import com.brugalibre.common.security.rest.model.RegisterRequest;
-import com.brugalibre.common.security.rest.model.RegisterResponse;
+import com.brugalibre.common.security.rest.UserAlreadyExistsException;
+import com.brugalibre.common.security.user.model.register.RegisterRequest;
+import com.brugalibre.common.security.user.model.register.RegisterResponse;
 import com.brugalibre.common.security.user.model.User;
 import com.brugalibre.common.security.user.repository.SanitizedRegisterUserRequest;
 import com.brugalibre.common.security.user.repository.UserDetailsServiceImpl;

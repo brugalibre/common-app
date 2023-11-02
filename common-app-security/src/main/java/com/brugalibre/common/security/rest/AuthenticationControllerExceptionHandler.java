@@ -1,4 +1,4 @@
-package com.brugalibre.common.security.rest.api;
+package com.brugalibre.common.security.rest;
 
 import com.brugalibre.common.security.i18n.TextResources;
 import org.springframework.http.HttpStatus;

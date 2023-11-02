@@ -1,13 +1,13 @@
-package com.brugalibre.common.security.rest.api;
+package com.brugalibre.common.security.rest;
 
 import com.brugalibre.common.rest.api.mobilephone.MobilePhoneController;
 import com.brugalibre.common.rest.model.ChangeMobilePhoneRequest;
 import com.brugalibre.common.security.auth.config.TestCommonAppSecurityConfig;
 import com.brugalibre.common.security.auth.register.UserRegisteredEvent;
 import com.brugalibre.common.security.auth.register.UserRegisteredObserver;
-import com.brugalibre.common.security.rest.model.RegisterRequest;
-import com.brugalibre.common.security.rest.service.UserRegisterService;
+import com.brugalibre.common.security.user.model.register.RegisterRequest;
 import com.brugalibre.common.security.user.repository.UserDetailsServiceImpl;
+import com.brugalibre.common.security.user.service.register.UserRegisterService;
 import com.brugalibre.domain.user.model.User;
 import com.brugalibre.domain.user.repository.UserRepository;
 import com.brugalibre.persistence.user.Role;
