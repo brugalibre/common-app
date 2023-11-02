@@ -1,11 +1,15 @@
 package com.brugalibre.domain.user.service;
 
+import com.brugalibre.domain.user.mapper.UserEntityMapper;
+import com.brugalibre.domain.user.mapper.UserEntityMapperImpl;
 import com.brugalibre.domain.user.model.User;
 import com.brugalibre.domain.user.model.change.ChangeEventType;
 import com.brugalibre.domain.user.model.change.UserChangedEvent;
 import com.brugalibre.domain.user.model.change.UserChangedNotifier;
 import com.brugalibre.domain.user.model.change.UserChangedObserver;
+import com.brugalibre.domain.user.model.yaml.UserYamlInput;
 import com.brugalibre.domain.user.repository.UserRepository;
+import com.brugalibre.util.file.yml.YamlService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,12 +20,38 @@ import static java.util.Objects.requireNonNull;
 @Service
 public class UserService implements UserChangedNotifier {
 
+    private final UserEntityMapper userEntityMapper;
     private final UserRepository userRepository;
+    private final YamlService yamlService;
     private final List<UserChangedObserver> userChangedObservers;
 
     public UserService(UserRepository userRepository) {
+        this.userEntityMapper = new UserEntityMapperImpl();
         this.userRepository = userRepository;
+        this.yamlService = new YamlService();
         this.userChangedObservers = new ArrayList<>();
+    }
+
+    /**
+     * Deletes all {@link User}s
+     */
+    public void deleteAll() {
+        userRepository.deleteAll();
+    }
+
+    /**
+     * Creates one or more {@link User} which are defined in the given yaml-file.
+     * <b>Note:</b> This yaml-file must contain a file structured according to the {@link UserYamlInput} class
+     *
+     * @param yamlFile the yaml-file containing a {@link UserYamlInput}
+     * @return a list of persisted {@link User}s
+     */
+    public List<User> createFromYaml(String yamlFile) {
+        UserYamlInput userYamlInputs = yamlService.readYaml(yamlFile, UserYamlInput.class);
+        return userEntityMapper.map2Users(userYamlInputs.getUserYamlEntries())
+                .stream()
+                .map(this::persist)
+                .toList();
     }
 
     /**

@@ -8,10 +8,13 @@ import com.brugalibre.domain.user.model.change.ChangeEventType;
 import com.brugalibre.domain.user.model.change.UserChangedEvent;
 import com.brugalibre.domain.user.model.change.UserChangedObserver;
 import com.brugalibre.domain.user.repository.UserRepository;
+import com.brugalibre.persistence.user.Role;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.eq;
@@ -48,6 +51,24 @@ class UserServiceTest {
 
         // Then
         assertThat(changedUser.password()).isEqualTo(newPassword);
+    }
+
+    @Test
+    void createUsersFromYamlFile() {
+        // Given
+        String ymlFile = "config/test-user-yaml-input.yaml";
+
+        // When
+        List<User> persistentUsers = userService.createFromYaml(ymlFile);
+
+        // Then
+        assertThat(persistentUsers.size()).isEqualTo(2);
+        assertThat(persistentUsers.get(0).username()).isEqualTo("test-user");
+        assertThat(persistentUsers.get(0).getMobilePhone().getPhoneNr()).isEqualTo("0711234567");
+        assertThat(persistentUsers.get(0).roles()).isEqualTo(List.of(Role.USER, Role.ADMIN));
+        assertThat(persistentUsers.get(1).username()).isEqualTo("test-user2");
+        assertThat(persistentUsers.get(1).getMobilePhone().getPhoneNr()).isEqualTo("0041791234567");
+        assertThat(persistentUsers.get(1).roles()).isEqualTo(List.of(Role.USER));
     }
 
     @Test

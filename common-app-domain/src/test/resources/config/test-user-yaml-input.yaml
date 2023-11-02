@@ -1,0 +1,12 @@
+userYamlEntries:
+  - username: test-user
+    password: 123
+    phoneNr: 0711234567
+    roles:
+      - USER
+      - ADMIN
+  - username: test-user2
+    password: 321
+    phoneNr: +41791234567
+    roles:
+      - USER
