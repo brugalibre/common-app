@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestYmlConfig implements YmlConfig {
-   private final List<String> someList;
-   private final boolean booleanValue;
+   private List<String> someList;
+   private boolean booleanValue;
 
    public TestYmlConfig() {
       this.booleanValue = false;
@@ -28,7 +28,15 @@ public class TestYmlConfig implements YmlConfig {
       return someList;
    }
 
-   public boolean isBooleanValue() {
+   public boolean getBooleanValue() {
       return booleanValue;
+   }
+
+   public void setSomeList(List<String> someList) {
+      this.someList = someList;
+   }
+
+   public void setBooleanValue(boolean booleanValue) {
+      this.booleanValue = booleanValue;
    }
 }

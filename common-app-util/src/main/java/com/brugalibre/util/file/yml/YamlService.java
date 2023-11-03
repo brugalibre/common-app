@@ -2,6 +2,8 @@ package com.brugalibre.util.file.yml;
 
 import com.brugalibre.util.file.FileUtil;
 import com.brugalibre.util.config.yml.YmlConfig;
+import org.yaml.snakeyaml.DumperOptions;
+import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.representer.Representer;
@@ -33,7 +35,7 @@ public class YamlService {
     */
    public <T extends YmlConfig> T readYaml(String ymlFile, Class<T> clazz) {
       Representer representer = createRepresenter();
-      Yaml yaml = new Yaml(new Constructor(clazz), representer);
+      Yaml yaml = new Yaml(new Constructor(clazz, new LoaderOptions()), representer);
       try (InputStream inputStream = FileUtil.getInputStream(ymlFile)) {
          T ymlConfig = yaml.load(inputStream);
          ymlConfig.setConfigFile(ymlFile);
@@ -52,7 +54,6 @@ public class YamlService {
       try {
          return clazz.getConstructor().newInstance();
       } catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-         e.printStackTrace();
          throw new IllegalStateException("Not possible to create empty config instance!", e);
       }
    }
@@ -79,7 +80,7 @@ public class YamlService {
    }
 
    private static Representer createRepresenter() {
-      Representer representer = new Representer();
+      Representer representer = new Representer(new DumperOptions());
       representer.getPropertyUtils().setSkipMissingProperties(true);
       return representer;
    }

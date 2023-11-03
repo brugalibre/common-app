@@ -20,7 +20,20 @@ class YamlServiceTest {
 
       // Then
       MatcherAssert.assertThat(userRoleConfig.getSomeList().size(), is(0));
-      MatcherAssert.assertThat(userRoleConfig.isBooleanValue(), is(false));
+      MatcherAssert.assertThat(userRoleConfig.getBooleanValue(), is(false));
+   }
+
+   @Test
+   void readYamlWithConfigFileI() {
+      // Given
+      YamlService yamlService = new YamlService(false);
+
+      // When
+      TestYmlConfig userRoleConfig = yamlService.readYaml("test-yaml.yaml", TestYmlConfig.class);
+
+      // Then
+      MatcherAssert.assertThat(userRoleConfig.getSomeList().size(), is(2));
+      MatcherAssert.assertThat(userRoleConfig.getBooleanValue(), is(true));
    }
 
    @Test
