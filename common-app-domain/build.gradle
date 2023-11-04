@@ -6,7 +6,7 @@ plugins {
 apply from: '../test.gradle'
 apply from: '../common-app.gradle'
 
-version '1.1.6-SNAPSHOT'
+version '1.1.7-SNAPSHOT'
 
 repositories {
     mavenLocal()
@@ -16,12 +16,12 @@ repositories {
 dependencies {
 
     // persistence
-    api 'org.springframework.boot:spring-boot-starter-data-jpa:3.0.0'
-    api 'org.springframework.boot:spring-boot-starter-validation:3.0.0'
-    compileOnly 'org.springframework.boot:spring-boot-starter-web:3.0.0'
+    api 'org.springframework.boot:spring-boot-starter-data-jpa:3.1.5'
+    api 'org.springframework.boot:spring-boot-starter-validation:3.1.5'
+    compileOnly 'org.springframework.boot:spring-boot-starter-web:3.1.5'
     implementation group: 'com.brugalibre', name: 'common-app-util', version: '1.0.3-SNAPSHOT'
 
     testImplementation group: 'com.h2database', name: 'h2', version: '2.1.214'
     testImplementation group: 'org.mapstruct', name: 'mapstruct', version: '1.5.2.Final'
-    testImplementation('org.springframework.boot:spring-boot-starter-security:3.0.0')
+    testImplementation('org.springframework.boot:spring-boot-starter-security:3.1.5')
 }
