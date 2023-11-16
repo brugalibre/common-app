@@ -8,7 +8,6 @@ import okhttp3.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Base64;
 import java.util.concurrent.TimeUnit;
 
 import static com.brugalibre.common.http.auth.AuthConst.AUTHORIZATION;
@@ -24,23 +23,12 @@ public class HttpService {
    private static final Logger LOG = LoggerFactory.getLogger(HttpService.class);
    public static final String APPLICATION_JSON = "application/json";
    private final OkHttpClient okHttpClient;
-   private String credentials;
 
    /**
     * Creates a new {@link HttpService} without any credentials
     */
    public HttpService(int timeOut) {
       this.okHttpClient = buildOkHttpClient(timeOut);
-      this.credentials = "not-set";
-   }
-
-   /**
-    * Defines the credentials for this {@link HttpService} with the provided credentials
-    *
-    * @param credentials the credentials
-    */
-   public void setCredentials(String credentials) {
-      this.credentials = credentials;
    }
 
    /**
@@ -86,6 +74,7 @@ public class HttpService {
       if (httpRequest.httpMethod() == HttpMethod.GET) {
          return new Request.Builder()
                  .url(httpRequest.url())
+                 .header(AUTHORIZATION, httpRequest.authorization())
                  .build();
       }
       RequestBody body = RequestBody.create(httpRequest.jsonBody(), MediaType.parse(APPLICATION_JSON));
@@ -93,6 +82,7 @@ public class HttpService {
               .url(httpRequest.url())
               .header("Accept", APPLICATION_JSON)
               .header("Content-Type", APPLICATION_JSON)
+              .header(AUTHORIZATION, httpRequest.authorization())
               .method(httpRequest.httpMethod().name(), body)
               .build();
    }
@@ -100,16 +90,6 @@ public class HttpService {
    private OkHttpClient buildOkHttpClient(int timeOut) {
       return new OkHttpClient().newBuilder()
               .readTimeout(timeOut, TimeUnit.SECONDS)
-              .addInterceptor(getAuthorizationInterceptor())
               .build();
-   }
-
-   private Interceptor getAuthorizationInterceptor() {
-      return chain -> {
-         Request request = chain.request();
-         return chain.proceed(request.newBuilder()
-                 .header(AUTHORIZATION, credentials)
-                 .build());
-      };
    }
 }
