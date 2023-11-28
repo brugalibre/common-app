@@ -6,8 +6,7 @@ import com.brugalibre.persistence.user.UserEntity;
 import jakarta.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "dm_contact_point_type", discriminatorType = DiscriminatorType.STRING)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class ContactPointEntity extends DomainEntity {
 
    @Enumerated(value = EnumType.STRING)
