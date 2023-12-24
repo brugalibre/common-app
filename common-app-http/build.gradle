@@ -6,7 +6,7 @@ plugins {
 apply from: '../test.gradle'
 apply from: '../common-app.gradle'
 
-version '2.0.0-SNAPSHOT'
+version '2.0.1-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -14,8 +14,8 @@ repositories {
 
 dependencies {
 
-    api 'com.squareup.okhttp3:okhttp:4.10.0'
-    api group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.5'
+    api 'com.squareup.okhttp3:okhttp:4.12.0'
+    api group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.16.0'
 
     testImplementation group: 'com.brugalibre', name: 'common-app-test', version: '1.0.0-SNAPSHOT'
 }

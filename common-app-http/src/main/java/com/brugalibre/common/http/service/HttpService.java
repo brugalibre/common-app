@@ -25,10 +25,19 @@ public class HttpService {
    private final OkHttpClient okHttpClient;
 
    /**
-    * Creates a new {@link HttpService} without any credentials
+    * Creates a new {@link HttpService} without any header interceptors
     */
    public HttpService(int timeOut) {
-      this.okHttpClient = buildOkHttpClient(timeOut);
+      this(timeOut, chain -> chain.proceed(chain.request()));
+   }
+
+   /**
+    * Creates a new {@link HttpService} with the given header {@link Interceptor}
+    *
+    * @param interceptor {@link Interceptor} which allows to apply additional information such as headers to any request
+    */
+   public HttpService(int timeOut, Interceptor interceptor) {
+      this.okHttpClient = buildOkHttpClient(timeOut, interceptor);
    }
 
    /**
@@ -87,9 +96,10 @@ public class HttpService {
               .build();
    }
 
-   private OkHttpClient buildOkHttpClient(int timeOut) {
+   private OkHttpClient buildOkHttpClient(int timeOut, Interceptor interceptor) {
       return new OkHttpClient().newBuilder()
               .readTimeout(timeOut, TimeUnit.SECONDS)
+              .addInterceptor(interceptor)
               .build();
    }
 }
