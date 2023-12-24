@@ -33,8 +33,8 @@ public class DummyHttpServerTestCaseBuilder {
       return this;
    }
 
-   public HttpRequestResponseBuilder withRequestResponse(String path) {
-      return new HttpRequestResponseBuilder(path, this);
+   public HttpRequestResponseBuilder withRequestResponse() {
+      return new HttpRequestResponseBuilder(this);
    }
 
    public DummyHttpServerTestCaseBuilder build() {
@@ -61,7 +61,7 @@ public class DummyHttpServerTestCaseBuilder {
    public static final class HttpRequestResponseBuilder {
 
       private final DummyHttpServerTestCaseBuilder dummyHttpServerTestCaseBuilder;
-      private final String path;
+      private String path;
       private String responseBody;
       private String method;
       private HttpRequest httpRequest;
@@ -70,10 +70,14 @@ public class DummyHttpServerTestCaseBuilder {
       private String requestBody;
       private HttpStatusCode httpStatusCode;
 
-      public HttpRequestResponseBuilder(String path, DummyHttpServerTestCaseBuilder dummyHttpServerTestCaseBuilder) {
-         this.path = path;
+      public HttpRequestResponseBuilder(DummyHttpServerTestCaseBuilder dummyHttpServerTestCaseBuilder) {
          this.httpStatusCode = HttpStatusCode.OK_200;
          this.dummyHttpServerTestCaseBuilder = dummyHttpServerTestCaseBuilder;
+      }
+
+      public HttpRequestResponseBuilder withPath(String path) {
+         this.path = path;
+         return this;
       }
 
       public HttpRequestResponseBuilder withMethod(String method) {
@@ -102,6 +106,7 @@ public class DummyHttpServerTestCaseBuilder {
       }
 
       public DummyHttpServerTestCaseBuilder buildRequestResponse() {
+         requireNonNull(path, "call 'withPath' first");
          httpRequest = new HttpRequest()
                  .withMethod(method)
                  .withBody(requestBody)

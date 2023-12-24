@@ -6,12 +6,12 @@ plugins {
 apply from: '../test.gradle'
 apply from: '../common-app.gradle'
 
-version '1.0.1-SNAPSHOT'
+version '1.0.2-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    api group: 'org.mock-server', name: 'mockserver-netty', version: '5.11.2'
+    api group: 'org.mock-server', name: 'mockserver-netty', version: '5.15.0'
 }
