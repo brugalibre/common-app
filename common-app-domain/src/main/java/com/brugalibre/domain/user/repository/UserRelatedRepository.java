@@ -20,4 +20,11 @@ public interface UserRelatedRepository<D extends DomainModel> extends CommonDoma
     * @throws NoDomainModelFoundException if there is no {@link D} associated with the given user-id
     */
    D getByUserId(String userId);
+
+   /**
+    * Deletes an entity from type {@link D} which belongs to the given user id
+    *
+    * @param userId the id of the {@link User}
+    */
+   void deleteByUserId(String userId);
 }

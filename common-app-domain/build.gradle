@@ -6,7 +6,7 @@ plugins {
 apply from: '../test.gradle'
 apply from: '../common-app.gradle'
 
-version '1.2.0-SNAPSHOT'
+version '1.2.1-SNAPSHOT'
 
 repositories {
     mavenLocal()
