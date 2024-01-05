@@ -6,7 +6,7 @@ plugins {
 apply from: '../test.gradle'
 apply from: '../common-app.gradle'
 
-version '1.2.6-SNAPSHOT'
+version '1.2.7-SNAPSHOT'
 
 repositories {
     mavenLocal()
@@ -16,7 +16,7 @@ repositories {
 dependencies {
 
     // app-domain & validation
-    compileOnly group: 'com.brugalibre', name: 'common-app-domain', version: '1.1.7-SNAPSHOT'
+    compileOnly group: 'com.brugalibre', name: 'common-app-domain', version: '1.2.1-SNAPSHOT'
     compileOnly 'org.springframework.data:spring-data-jpa:3.1.5'
 
     // Security
