@@ -46,6 +46,28 @@ class UserRepositoryTest {
    }
 
    @Test
+   void testCreateUserEntityWithPhoneNumberInTwoSteps() {
+      // Given
+      String phoneNrOld = "+41 (99) 000 12 34";
+      String phoneNr = "+41 (78) 123 45 67";
+      String expectedPhoneNur = "0041781234567";
+      String username = "jack1";
+      MobilePhone mobilePhone = MobilePhone.of(phoneNrOld);
+      User user = User.of(username, "def", mobilePhone);
+
+      // When
+      MobilePhone newMobilePhone = MobilePhone.of(phoneNr);
+      User savedUser = userRepository.save(user);
+      User userwithphoner = User.of(savedUser.id(), username, "def", newMobilePhone);
+      savedUser = userRepository.save(userwithphoner);
+
+      // Then, we expect that the old nr was deleted
+      assertThat(savedUser.username(), is(username));
+      assertThat(savedUser.contactPoints().size(), is(1));
+      assertThat(savedUser.getMobilePhone().getPhoneNr(), is(expectedPhoneNur));
+   }
+
+   @Test
    void testCreateAndLoadUserEntityWithPhoneNumber_PersistedPhoneNumberWithoutCountryCode() {
       // Given
       String theRightPhoneNrToStore = "078 987 65 43";
