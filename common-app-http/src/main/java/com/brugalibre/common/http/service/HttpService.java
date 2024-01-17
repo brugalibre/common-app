@@ -4,6 +4,7 @@ import com.brugalibre.common.http.model.method.HttpMethod;
 import com.brugalibre.common.http.model.request.HttpRequest;
 import com.brugalibre.common.http.model.response.ResponseWrapper;
 import com.brugalibre.common.http.service.response.ResponseReader;
+import com.brugalibre.common.http.util.RequestUtil;
 import okhttp3.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,7 +71,7 @@ public class HttpService {
    }
 
    private <T> ResponseWrapper<T> callRequestAndParseInternal(ResponseReader<T> reader, String url, Request request) {
-      LOG.info("Call request {}", request);
+      LOG.info("Call request {}", RequestUtil.toString(request));
       try (Response response = okHttpClient.newCall(request).execute()) {
          return reader.readResponse(response);
       } catch (Exception e) {

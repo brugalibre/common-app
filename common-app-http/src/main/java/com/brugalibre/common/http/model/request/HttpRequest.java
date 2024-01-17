@@ -29,4 +29,14 @@ public record HttpRequest(HttpMethod httpMethod, String jsonBody, String url, St
    public HttpRequest withAuthorization(String authorization) {
       return new HttpRequest(this.httpMethod, this.jsonBody, this.url, authorization);
    }
+
+   @Override
+   public String toString() {
+      return "HttpRequest{" +
+              "httpMethod=" + httpMethod +
+              ", jsonBody='" + jsonBody + '\'' +
+              ", url='" + url + '\'' +
+              ", authorization='#####'" +
+              '}';
+   }
 }
