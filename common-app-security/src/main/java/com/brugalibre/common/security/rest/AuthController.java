@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/brugalibre/common/v1/auth")
 public class AuthController {
 
    private final UserRegisterService userRegisterService;
@@ -44,7 +44,7 @@ public class AuthController {
       return ResponseEntity.ok(registerResponse);
    }
 
-   @PutMapping("/changedPassword")
+   @PutMapping("/changePassword")
    public ResponseEntity<?> changePassword(@Valid @RequestBody UserPasswordChangeRequest userPasswordChangeRequest) {
       UserPasswordChangeResponse userPasswordChangeResponse = userPasswordChangeService.changeUserPassword(userPasswordChangeRequest);
       return ResponseEntity.ok(userPasswordChangeResponse);

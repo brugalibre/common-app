@@ -71,7 +71,7 @@ public class WebSecurityConfig {
               .authorizeHttpRequests(authorize -> authorize
                       // grant access for assets & stuff... I'm doing this probably wrong..
                       .requestMatchers(getRequestMatchersForPaths(WEB_RESOURCES)).permitAll()
-                      .requestMatchers(antMatcher("/api/auth/**")).permitAll()
+                      .requestMatchers(antMatcher("/api/brugalibre/common/v1/auth/**")).permitAll()
                       .requestMatchers(antMatcher("/error**")).permitAll()
                       .requestMatchers(antMatcher("/h2-console/**")).permitAll()
                       .requestMatchers(getRequestMatchersForPaths(webSecurityConfigHelper.getOptionalPermittedPatterns())).permitAll()
