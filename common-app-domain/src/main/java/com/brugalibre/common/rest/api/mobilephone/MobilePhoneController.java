@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/mobilephone")
+@RequestMapping("/api/brugalibre/common/v1/mobilephone")
 public class MobilePhoneController {
 
    private final MobilePhoneChangeService mobilePhoneChangeService;
