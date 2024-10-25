@@ -25,8 +25,9 @@ class ClickSendAlertSendServiceImplTest {
       // Given
       int port = 8181;
       String path = "/v3/send/sms";
+      String title = "test-title";
       String msg = "test-message";
-      AlertSendInfos alertSendInfos = getAlertSendInfos(msg);
+      AlertSendInfos alertSendInfos = getAlertSendInfos(title, msg);
       AlertSendConfig alertSendConfig = new YamlService().readYaml(ALERT_TEST_AQUABASILEA_ALERT_NOTIFICATION_YML, AlertSendConfig.class);
       alertSendConfig.setApiKeyProvider("password"::toCharArray);
 
@@ -34,7 +35,8 @@ class ClickSendAlertSendServiceImplTest {
       String authValue = "Basic bnVsbDpwYXNzd29yZA==";// change if user/password from above is changed
       DummyHttpServerTestCaseBuilder serverTestCaseBuilder = new DummyHttpServerTestCaseBuilder(port)
               .withHost(HOST)
-              .withRequestResponse(path)
+              .withRequestResponse()
+              .withPath(path)
               .withMethod(POST)
               .withResponseBody(response)
               .withHeader(new Header("Authorization", authValue))
@@ -51,8 +53,8 @@ class ClickSendAlertSendServiceImplTest {
       assertThat(actualResponse.getResponseEntity().toString(), is(response));
    }
 
-   private static AlertSendInfos getAlertSendInfos(String msg) {
+   private static AlertSendInfos getAlertSendInfos(String title, String msg) {
       List<String> receiver = List.of("0791234567");
-      return new AlertSendInfos(msg, receiver);
+      return new AlertSendInfos(title, msg, receiver);
    }
 }

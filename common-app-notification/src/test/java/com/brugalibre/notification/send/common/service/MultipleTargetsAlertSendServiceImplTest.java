@@ -43,9 +43,10 @@ class MultipleTargetsAlertSendServiceImplTest {
       });
       MultipleTargetsAlertSendServiceImpl multipleTargetsAlertSendService = new MultipleTargetsAlertSendServiceImpl(alertType -> alertSendService);
       String msg = "test";
+      String title = "title";
       AlertSendConfig alertSendConfig = new AlertSendConfig();
       alertSendConfig.setAlertTypes(List.of(AlertType.EMAIL, AlertType.SMS));
-      AlertSendInfos alertSendInfos = new AlertSendInfos(msg, receivers);
+      AlertSendInfos alertSendInfos = new AlertSendInfos(title, msg, receivers);
 
       // When
       AlertSendResponse alertSendResponse = multipleTargetsAlertSendService.sendAlert(alertSendConfig, alertSendInfos);
@@ -80,9 +81,10 @@ class MultipleTargetsAlertSendServiceImplTest {
       });
       MultipleTargetsAlertSendServiceImpl multipleTargetsAlertSendService = new MultipleTargetsAlertSendServiceImpl(alertType -> alertSendService);
       String msg = "test";
+      String title = "title";
       AlertSendConfig alertSendConfig = new AlertSendConfig();
       alertSendConfig.setAlertTypes(List.of(AlertType.EMAIL, AlertType.SMS));
-      AlertSendInfos alertSendInfos = new AlertSendInfos(msg, receivers);
+      AlertSendInfos alertSendInfos = new AlertSendInfos(title, msg, receivers);
 
       // When
       AlertSendResponse alertSendResponse = multipleTargetsAlertSendService.sendAlert(alertSendConfig, alertSendInfos);
