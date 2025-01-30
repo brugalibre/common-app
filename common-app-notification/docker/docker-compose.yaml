@@ -1,0 +1,7 @@
+services:
+  alert-send:
+    container_name: alert-send
+    build:
+      context: ..
+      dockerfile: ./docker/Dockerfile
+    image: alert-send:latest

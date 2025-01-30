@@ -1,12 +1,13 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
+    id 'org.springframework.boot' version '3.2.3'
 }
 
 apply from: '../test.gradle'
 apply from: '../common-app.gradle'
 
-version '1.0.3-SNAPSHOT'
+version '1.1.0-SNAPSHOT'
 
 repositories {
     mavenLocal()
@@ -17,7 +18,8 @@ dependencies {
 
     implementation group: 'com.brugalibre', name: 'common-app-util', version: '1.0.3-SNAPSHOT'
 
-    implementation group: 'com.messagebird', name: 'messagebird-api', version: '3.2.1'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '3.4.2'
+    implementation group: 'com.messagebird', name: 'messagebird-api', version: '6.2.2'
     implementation 'org.glassfish.jersey.media:jersey-media-json-jackson:3.1.1'
     implementation 'org.glassfish.jersey.core:jersey-client:3.1.1'
     implementation 'org.glassfish.jersey.inject:jersey-hk2:3.1.1'

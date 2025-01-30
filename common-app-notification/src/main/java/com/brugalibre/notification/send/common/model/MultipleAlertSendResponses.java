@@ -38,12 +38,12 @@ public class MultipleAlertSendResponses implements AlertSendResponse {
               .sorted()
               .toList();
       if (allStatus.size() == 1) {
-         return allStatus.get(0);
+         return allStatus.getFirst();
       }
       // we just returned the one with the highest number
       // assuming that a server error is more important than a client-error
       // which is more important than a success
-      return allStatus.get(allStatus.size() - 1);
+      return allStatus.getLast();
    }
 
 }

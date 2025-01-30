@@ -6,8 +6,8 @@ import com.brugalibre.notification.api.v1.service.AlertSendException;
 import com.brugalibre.notification.api.v1.service.AlertSendService;
 import com.brugalibre.notification.config.AlertSendConfig;
 import com.brugalibre.notification.send.clicksend.model.msg.common.ClickSendMessage;
-import com.brugalibre.notification.send.clicksend.model.response.ClickSendAlertSendResponse;
 import com.brugalibre.notification.send.common.model.AlertSendInfos;
+import com.brugalibre.notification.send.common.model.CommonAlertSendResponse;
 import com.brugalibre.notification.util.AuthenticationUtil;
 import com.brugalibre.util.file.json.JsonUtil;
 import jakarta.ws.rs.client.Client;
@@ -52,7 +52,7 @@ public class ClickSendAlertSendServiceImpl implements AlertSendService {
    private AlertSendResponse sendAlertWithPayload(AlertSendConfig alertSendConfig, Entity<String> payload) {
       Response response = createAndSendRestRequest(alertSendConfig, payload, client);
       LOG.info("Sending text done, response [{}]", response);
-      return ClickSendAlertSendResponse.of(response);
+      return CommonAlertSendResponse.of(response);
    }
 
    private Response createAndSendRestRequest(AlertSendConfig alertSendConfig, Entity<String> payload, Client client) {
