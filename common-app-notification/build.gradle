@@ -1,4 +1,5 @@
 plugins {
+    id 'java'
     id 'java-library'
     id 'maven-publish'
     id 'org.springframework.boot' version '3.2.3'
@@ -26,4 +27,11 @@ dependencies {
     implementation group: 'jakarta.activation', name: 'jakarta.activation-api', version: '2.1.0'
 
     testImplementation group: 'com.brugalibre', name: 'common-app-test', version: '1.0.2-SNAPSHOT'
+}
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'com.brugalibre.notification.app.AlertSendRestApplication'
+        )
+    }
 }
