@@ -5,6 +5,8 @@ services:
     build:
       context: ..
       dockerfile: ./docker/Dockerfile
+    ports:
+      - "7530:7530"
     volumes:
       - C:/Users/domin/OneDrive/Desktop/config:/config
     networks:
