@@ -26,6 +26,7 @@ public class AlertSendController {
    public AlertSendResponse sendNotification(@RequestBody AlertSendInfos alertSendInfos) {
       return alertSendService.sendMessage(alertSendInfos);
    }
+
    @GetMapping(path = "/ping")
    public String ping() {
       LOG.info("Ping called");
