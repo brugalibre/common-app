@@ -1,5 +1,6 @@
 package com.brugalibre.notification.send.common.service;
 
+import com.brugalibre.notification.api.v1.alerttype.AlertType;
 import com.brugalibre.notification.api.v1.model.AlertSendResponse;
 import com.brugalibre.notification.api.v1.service.AlertSendException;
 import com.brugalibre.notification.api.v1.service.AlertSendService;
@@ -18,13 +19,13 @@ import java.util.function.Function;
 public class BasicAlertSender {
 
    private static final Logger LOG = LoggerFactory.getLogger(BasicAlertSender.class);
-   protected final Function<AlertSendConfig, AlertSendService> alertServiceFunction;
+   protected final Function<AlertType, AlertSendService> alertServiceFunction;
    protected final AlertSendConfigProvider configProvider;
 
    /**
     * Constructor only for testing purpose
     */
-   public BasicAlertSender(AlertSendConfigProvider configProvider, Function<AlertSendConfig, AlertSendService> alertServiceFunction) {
+   public BasicAlertSender(AlertSendConfigProvider configProvider, Function<AlertType, AlertSendService> alertServiceFunction) {
       this.configProvider = configProvider;
       this.alertServiceFunction = alertServiceFunction;
    }
@@ -33,7 +34,7 @@ public class BasicAlertSender {
     * Default constructor. Uses the ALERT_API_CONST_FILE and the {@link AlertSendServiceFactory} in order to create an {@link AlertSendService}
     */
    public BasicAlertSender(AlertSendConfigProvider configProvider) {
-      this(configProvider, alertSendConfig -> AlertSendServiceFactory.getAlertSendService4Name(alertSendConfig.getAlertServiceName()));
+      this(configProvider, AlertSendServiceFactory::getAlertSendService4Name);
    }
 
    /**
@@ -45,14 +46,14 @@ public class BasicAlertSender {
    public AlertSendResponse sendMessage(AlertSendInfos alertSendInfos) {
       AlertSendConfig alertSendConfig = configProvider.getAlertSendConfig();
       try {
-         return getAlertSendApi(alertSendConfig).sendAlert(alertSendConfig, alertSendInfos);
+         return getAlertSendApi(alertSendInfos).sendAlert(alertSendConfig, alertSendInfos);
       } catch (AlertSendException e) {
-         LOG.error(String.format("Sending of alert '%s' failed!", alertSendInfos.msg()), e);
+         LOG.error("Sending of alert '{}' failed!", alertSendInfos.msg(), e);
          return AlertSendResponse.error(e.getMessage());
       }
    }
 
-   private AlertSendService getAlertSendApi(AlertSendConfig alertSendConfig) {
-      return alertServiceFunction.apply(alertSendConfig);
+   private AlertSendService getAlertSendApi(AlertSendInfos alertSendInfos) {
+      return alertServiceFunction.apply(alertSendInfos.alertType());
    }
 }

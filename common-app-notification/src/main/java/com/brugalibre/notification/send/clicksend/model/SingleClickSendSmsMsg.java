@@ -1,4 +1,4 @@
-package com.brugalibre.notification.send.clicksend.model.msg.sms;
+package com.brugalibre.notification.send.clicksend.model;
 
 public class SingleClickSendSmsMsg {
 

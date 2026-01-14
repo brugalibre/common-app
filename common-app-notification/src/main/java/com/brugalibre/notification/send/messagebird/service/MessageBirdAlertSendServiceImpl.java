@@ -5,7 +5,7 @@ import com.brugalibre.notification.api.v1.service.AlertSendException;
 import com.brugalibre.notification.api.v1.service.AlertSendService;
 import com.brugalibre.notification.config.AlertSendConfig;
 import com.brugalibre.notification.send.common.model.AlertSendInfos;
-import com.brugalibre.notification.send.messagebird.model.MessageBirdSendAlertSendResponse;
+import com.brugalibre.notification.send.common.model.CommonAlertSendResponse;
 import com.messagebird.MessageBirdClient;
 import com.messagebird.MessageBirdService;
 import com.messagebird.MessageBirdServiceImpl;
@@ -28,7 +28,7 @@ public class MessageBirdAlertSendServiceImpl implements AlertSendService {
    @Override
    public AlertSendResponse sendAlert(AlertSendConfig alertSendConfig, AlertSendInfos alertSendInfos) throws AlertSendException {
       LOG.info("Sending text {} to {} receivers", alertSendInfos, alertSendInfos.receivers().size());
-      MessageBirdService messageBirdService = new MessageBirdServiceImpl(alertSendConfig.getApiKey());
+      MessageBirdService messageBirdService = new MessageBirdServiceImpl(String.valueOf(alertSendConfig.getSmsSendConfig().getApiKeyProvider()));
       MessageBirdClient messageBirdClient = new MessageBirdClient(messageBirdService);
       // convert String number into acceptable format
       List<BigInteger> receivers = alertSendInfos.receivers()
@@ -36,9 +36,9 @@ public class MessageBirdAlertSendServiceImpl implements AlertSendService {
               .map(BigInteger::new)
               .collect(Collectors.toList());
       try {
-         final MessageResponse response = messageBirdClient.sendMessage(alertSendConfig.getOriginator(), alertSendInfos.msg(), receivers);
+         final MessageResponse response = messageBirdClient.sendMessage(alertSendConfig.getSmsSendConfig().getOriginator(), alertSendInfos.msg(), receivers);
          LOG.info("Sending text done, response [{}]", response);
-         return MessageBirdSendAlertSendResponse.of(response);
+         return new CommonAlertSendResponse(200, response.getBody());
       } catch (UnauthorizedException | GeneralException e) {
          throw new AlertSendException(e);
       }

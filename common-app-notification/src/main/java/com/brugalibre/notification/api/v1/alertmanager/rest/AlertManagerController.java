@@ -2,6 +2,7 @@ package com.brugalibre.notification.api.v1.alertmanager.rest;
 
 
 import com.brugalibre.notification.api.v1.alertmanager.model.alertmanager.AlertMessage;
+import com.brugalibre.notification.api.v1.alerttype.AlertType;
 import com.brugalibre.notification.api.v1.model.AlertSendResponse;
 import com.brugalibre.notification.api.v1.alertmanager.model.alertmanager.alert.Alert;
 import com.brugalibre.notification.api.v1.alertmanager.model.alertmanager.alert.Annotations;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
 import java.util.List;
 
 @RequestMapping("/api/v1/alertmanger/notification")
@@ -43,7 +43,7 @@ public class AlertManagerController {
       alertMessage.alerts()
               .forEach(alertManagerAlert -> {
                  String msg = buildMessageToSend(alertManagerAlert);
-                 AlertSendInfos alertSendInfos = new AlertSendInfos(ALERT_TITLE, msg, List.of(alertManagerReceiver));
+                 AlertSendInfos alertSendInfos = new AlertSendInfos(AlertType.CLICK_SEND_SMS, ALERT_TITLE, msg, List.of(alertManagerReceiver));
                  LOG.info("Send sms for alert: {} to {}", msg, alertManagerReceiver);
                  alertSendService.sendMessage(alertSendInfos);
               });
@@ -54,7 +54,7 @@ public class AlertManagerController {
       Labels labels = alert.labels();
       Annotations annotations = alert.annotations();
       LocalDateTime startsAt = LocalDateTime.from(DateTimeFormatter.ISO_DATE_TIME.parse(alert.startsAt()));
-      return "Alert=%s\n is %s for instance=%s, started at '%s'. \nSeverity=%s, Summary=%s".formatted( labels.alertname(), alert.status(),
+      return "Alert=%s\n is %s for instance=%s, started at '%s'. \nSeverity=%s, Summary=%s".formatted(labels.alertname(), alert.status(),
               labels.instance(), startsAt, labels.severity(), annotations.summary());
    }
 }

@@ -3,9 +3,10 @@ application:
     receiver: 0711234567
   notification:
     notificationConfigFile: config/notification/dev-send-alert-config.yaml
-    apiKey: abc-1234
+    smsApiKey: abc-1234
+    eMailApiKey: abc-1234
   title: Alert Send
-  version: 2025.02.01
+  version: 2026.01.14
 logging:
   file:
     name: logs/alert-send.log

@@ -8,22 +8,26 @@ import org.springframework.stereotype.Service;
 @Service
 public class DefaultAlertSendConfigProviderImpl implements AlertSendConfigProvider {
 
-   private final String apiKey;
+   private final String smsApiKey;
+   private final String eMailApiKey;
    private final String alertConfigFile;
    private final YamlService yamlService;
 
    @Autowired
    public DefaultAlertSendConfigProviderImpl(@Value("${application.notification.notificationConfigFile}") String alertConfigFile,
-                                             @Value("${application.notification.apiKey}") String apiKey) {
+                                             @Value("${application.notification.smsApiKey}") String smsApiKey,
+                                             @Value("${application.notification.eMailApiKey}") String eMailApiKey) {
       this.alertConfigFile = alertConfigFile;
-      this.apiKey = apiKey;
+      this.smsApiKey = smsApiKey;
+      this.eMailApiKey = eMailApiKey;
       this.yamlService = new YamlService();
    }
 
    @Override
    public AlertSendConfig getAlertSendConfig() {
       AlertSendConfig alertSendConfig = yamlService.readYaml(alertConfigFile, AlertSendConfig.class);
-      alertSendConfig.setApiKeyProvider(apiKey::toCharArray);
+      alertSendConfig.setSmsApiKeyProvider(smsApiKey::toCharArray);
+      alertSendConfig.setEMailApiKeyProvider(eMailApiKey::toCharArray);
       return alertSendConfig;
    }
 }

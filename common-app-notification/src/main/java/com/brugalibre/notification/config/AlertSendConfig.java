@@ -1,6 +1,8 @@
 package com.brugalibre.notification.config;
 
 import com.brugalibre.notification.api.v1.alerttype.AlertType;
+import com.brugalibre.notification.config.email.EMailSendConfig;
+import com.brugalibre.notification.config.sms.SmsSendConfig;
 import com.brugalibre.util.config.yml.YmlConfig;
 
 import java.util.ArrayList;
@@ -10,61 +12,36 @@ import java.util.function.Supplier;
 import static java.util.Objects.isNull;
 
 public class AlertSendConfig implements YmlConfig {
-   private Supplier<char[]> apiKeyProvider;
-   private String alertServiceName;
-   private String username;
-   private String originator;
-   private int originatorMailId;
-   private List<AlertType> alertTypes;
+   private SmsSendConfig smsSendConfig;
+   private EMailSendConfig eMailSendConfig;
+
    private List<String> onApplicationErrorReceivers;
+   private AlertType onApplicationErrorAlertType;
 
    public AlertSendConfig() {
-      this.apiKeyProvider = ""::toCharArray;
-      this.alertTypes = List.of(AlertType.SMS);// default is sms
+      this.onApplicationErrorAlertType = AlertType.CLICK_SEND_SMS;
+      this.eMailSendConfig = new EMailSendConfig();
+      this.smsSendConfig = new SmsSendConfig();
    }
 
-   public int getOriginatorMailId() {
-      return originatorMailId;
+   public void seteMailSendConfig(EMailSendConfig eMailSendConfig) {
+      this.eMailSendConfig = eMailSendConfig;
    }
 
-   public void setOriginatorMailId(int originatorMailId) {
-      this.originatorMailId = originatorMailId;
+   public SmsSendConfig getSmsSendConfig() {
+      return smsSendConfig;
    }
 
-   public List<AlertType> getAlertTypes() {
-      return alertTypes;
+   public void setSmsSendConfig(SmsSendConfig smsSendConfig) {
+      this.smsSendConfig = smsSendConfig;
    }
 
-   public void setAlertTypes(List<AlertType> alertTypes) {
-      this.alertTypes = alertTypes;
+   public AlertType getOnApplicationErrorAlertType() {
+      return onApplicationErrorAlertType;
    }
 
-   public String getUsername() {
-      return username;
-   }
-
-   public String getAlertServiceName() {
-      return alertServiceName;
-   }
-
-   public void setAlertServiceName(String alertServiceName) {
-      this.alertServiceName = alertServiceName;
-   }
-
-   public void setUsername(String username) {
-      this.username = username;
-   }
-
-   public String getApiKey() {
-      return String.valueOf(apiKeyProvider.get());
-   }
-
-   public String getOriginator() {
-      return originator;
-   }
-
-   public void setOriginator(String originator) {
-      this.originator = originator;
+   public void setOnApplicationErrorAlertType(AlertType onApplicationErrorAlertType) {
+      this.onApplicationErrorAlertType = onApplicationErrorAlertType;
    }
 
    public List<String> getOnApplicationErrorReceivers() {
@@ -78,8 +55,16 @@ public class AlertSendConfig implements YmlConfig {
       this.onApplicationErrorReceivers = onApplicationErrorReceivers;
    }
 
-   public void setApiKeyProvider(Supplier<char[]> apiKeyProvider) {
-      this.apiKeyProvider = apiKeyProvider;
+   public void setSmsApiKeyProvider(Supplier<char[]> smsApiKeyProvider) {
+      this.smsSendConfig.setApiKeyProvider(smsApiKeyProvider);
+   }
+
+   public void setEMailApiKeyProvider(Supplier<char[]> eMailApiKeyProvider) {
+      this.eMailSendConfig.setApiKeyProvider(eMailApiKeyProvider);
+   }
+
+   public EMailSendConfig getEMailSendConfig() {
+      return eMailSendConfig;
    }
 
    /**

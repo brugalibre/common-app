@@ -1,3 +1,11 @@
-alertServiceName: "clicksend"
-username: "dominic.stalder89@gmail.com"
-originator: "asko"
+smsSendConfig:
+    alertServiceName: "clicksend"
+    originator: "asko"
+    username: "clicksend-unsername"
+eMailSendConfig:
+    username: "email-username"
+    sender: "sender"
+    smtpHost: "smtp.gmail.com"
+    smtpPort: "465"
+    smptSocketFactoryPort: "465"
+    smptSocketFactoryClass: "javax.net.ssl.SSLSocketFactory"
