@@ -54,7 +54,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
    }
 
    private UserEntity createUserEntity(SanitizedRegisterUserRequest registerRequest) {
-      List<ContactPointEntity> contactPoints = List.of(new MobilePhoneEntity(null, registerRequest.userPhoneNr()));
+      List<ContactPointEntity> contactPoints = List.of(new MobilePhoneEntity(registerRequest.userPhoneNr()));
       return new UserEntity(registerRequest.username(), registerRequest.password(), User.toRoles(registerRequest.roles()), contactPoints);
    }
 

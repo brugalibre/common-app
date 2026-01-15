@@ -1,12 +1,7 @@
 package com.brugalibre.common.domain.persistence;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
-import org.hibernate.annotations.GenericGenerator;
-
-import java.util.UUID;
+import jakarta.persistence.*;
+import org.hibernate.annotations.UuidGenerator;
 
 /**
  * The {@link DomainEntity} provides the most basic and necessary fields all entities must have
@@ -19,13 +14,8 @@ public abstract class DomainEntity implements IEntity<String> {
 
    @Id
    @Column(name = "id", updatable = false, nullable = false)
-   @GeneratedValue(generator = "uuid")
-   @GenericGenerator(name = "uuid", strategy = "uuid2")
+   @UuidGenerator
    protected String id;
-
-   public DomainEntity(String id) {
-      this.id = id == null ? UUID.randomUUID().toString() : id;
-   }
 
    public String getId() {
       return id;

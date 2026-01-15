@@ -120,7 +120,7 @@ class AuthControllerTest {
       try {
          authController.registerUser(registerRequest);
       } catch (IllegalStateException e) {
-         //ignore
+         // ignore, was thrown by us in order to simulate an observer failure
       }
 
       // Then

@@ -5,8 +5,6 @@ import com.brugalibre.persistence.contactpoint.ContactPointEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +19,8 @@ public class UserEntity extends DomainEntity {
    @NotBlank
    private String password;
 
-   @ElementCollection
+   @ElementCollection(fetch = FetchType.EAGER)
    @Enumerated(value = EnumType.STRING)
-   @LazyCollection(LazyCollectionOption.FALSE)
    private List<Role> roles;
 
    /*
@@ -39,13 +36,11 @@ public class UserEntity extends DomainEntity {
    private List<ContactPointEntity> contactPoints;
 
    public UserEntity() {
-      super(null);
       this.roles = new ArrayList<>();
       this.contactPoints = new ArrayList<>();
    }
 
    public UserEntity(String username, String password, List<Role> roles, List<ContactPointEntity> contactPoints) {
-      super(null);
       this.username = username;
       this.password = password;
       this.contactPoints = new ArrayList<>(contactPoints);

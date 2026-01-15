@@ -19,14 +19,12 @@ public class MobilePhoneEntity extends ContactPointEntity {
    @NotBlank
    private String phoneNr;
 
-   public MobilePhoneEntity(String id, String phoneNr) {
-      super(id);
+   public MobilePhoneEntity(String phoneNr) {
       setPhoneNr(phoneNr);
       setContactPointType(ContactPointType.MOBILE_PHONE);
    }
 
    public MobilePhoneEntity() {
-      super(null);
       setContactPointType(ContactPointType.MOBILE_PHONE);
    }
 

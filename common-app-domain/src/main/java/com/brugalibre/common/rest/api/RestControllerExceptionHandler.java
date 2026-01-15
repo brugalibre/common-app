@@ -17,19 +17,19 @@ import java.util.function.Consumer;
 public class RestControllerExceptionHandler {
 
    @ExceptionHandler(MethodArgumentNotValidException.class)
-   protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
+   protected ResponseEntity<?> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
       Map<String, String> errors = new HashMap<>();
       ex.getBindingResult()
               .getAllErrors()
               .forEach(putError(errors));
-      return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
+      return ResponseEntity.status(HttpStatus.UNPROCESSABLE_CONTENT)
               .body(errors);
    }
 
    @ExceptionHandler({PhoneNrNotValidException.class})
-   protected ResponseEntity<Object> handleOtherExceptions(Exception ex) {
+   protected ResponseEntity<?> handleOtherExceptions(Exception ex) {
       Map<String, String> errors = Map.of("error", ex.getLocalizedMessage());
-      return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
+      return ResponseEntity.status(HttpStatus.UNPROCESSABLE_CONTENT)
               .body(errors);
 
    }

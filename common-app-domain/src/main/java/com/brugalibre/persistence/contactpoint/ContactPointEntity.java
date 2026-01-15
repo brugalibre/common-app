@@ -16,14 +16,6 @@ public abstract class ContactPointEntity extends DomainEntity {
    @JoinColumn(name = "user_id")
    private UserEntity user;
 
-   public ContactPointEntity() {
-      super(null);
-   }
-
-   public ContactPointEntity(String id) {
-      super(id);
-   }
-
    public ContactPointType getContactPointType() {
       return contactPointType;
    }
