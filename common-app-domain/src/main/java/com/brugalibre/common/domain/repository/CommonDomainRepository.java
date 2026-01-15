@@ -44,4 +44,11 @@ public interface CommonDomainRepository<T extends DomainModel> {
     * Deletes all domain entities of this {@link CommonDomainRepository}
     */
    void deleteAll();
+
+   /**
+    * Deletes the {@link DomainModel} with the given id
+    *
+    * @param id the id of the {@link DomainModel} to delete
+    */
+   void deleteById(String id);
 }

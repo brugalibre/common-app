@@ -2,7 +2,6 @@ package com.brugalibre.common.security.user.model;
 
 
 import com.brugalibre.persistence.user.Role;
-import com.brugalibre.persistence.user.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -10,15 +9,11 @@ import java.util.List;
 
 public class User extends org.springframework.security.core.userdetails.User {
 
-   private String id;
+   private final String id;
 
-   public User(UserEntity userEntity) {
-      super(userEntity.getUsername(), userEntity.getPassword(), mapRoles2GrantedAuthorities(userEntity.getRoles()));
-      this.id = userEntity.getId();
-   }
-
-   public User(String username, String password, String phoneNr, List<Role> roles) {
-      super(username, password, mapRoles2GrantedAuthorities(roles));
+   public User(com.brugalibre.domain.user.model.User user) {
+      super(user.username(), user.password(), mapRoles2GrantedAuthorities(user.roles()));
+      this.id = user.getId();
    }
 
    public String getId() {

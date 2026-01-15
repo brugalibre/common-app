@@ -2,10 +2,9 @@ package com.brugalibre.common.security.user.repository;
 
 
 import com.brugalibre.common.security.user.model.User;
-import com.brugalibre.persistence.contactpoint.ContactPointEntity;
-import com.brugalibre.persistence.contactpoint.mobilephone.MobilePhoneEntity;
-import com.brugalibre.persistence.user.UserEntity;
-import com.brugalibre.persistence.user.dao.UserDao;
+import com.brugalibre.domain.contactpoint.mobilephone.model.MobilePhone;
+import com.brugalibre.domain.contactpoint.model.ContactPoint;
+import com.brugalibre.domain.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,11 +16,11 @@ import java.util.Optional;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-   private final UserDao userDao;// we should use the UserRepository but then the domain-user should contain the Role
+   private final UserRepository userRepository;
 
    @Autowired
-   public UserDetailsServiceImpl(UserDao userDao) {
-      this.userDao = userDao;
+   public UserDetailsServiceImpl(UserRepository userRepository) {
+      this.userRepository = userRepository;
    }
 
    /**
@@ -49,17 +48,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     * @return a persisted instance of the given {@link User}
     */
    public User save(SanitizedRegisterUserRequest registerRequest) {
-      UserEntity userEntity = this.userDao.save(createUserEntity(registerRequest));
-      return new User(userEntity);
+      com.brugalibre.domain.user.model.User user = this.userRepository.save(createUser(registerRequest));
+      return new User(user);
    }
 
-   private UserEntity createUserEntity(SanitizedRegisterUserRequest registerRequest) {
-      List<ContactPointEntity> contactPoints = List.of(new MobilePhoneEntity(registerRequest.userPhoneNr()));
-      return new UserEntity(registerRequest.username(), registerRequest.password(), User.toRoles(registerRequest.roles()), contactPoints);
+   private com.brugalibre.domain.user.model.User createUser(SanitizedRegisterUserRequest registerRequest) {
+      List<ContactPoint> contactPoints = List.of(MobilePhone.of(registerRequest.userPhoneNr()));
+      return new com.brugalibre.domain.user.model.User(null, registerRequest.username(), registerRequest.password(), contactPoints, User.toRoles(registerRequest.roles()));
    }
 
    private Optional<UserDetails> getOptionalUserDetails(String username) {
-      return userDao.findByUsername(username)
+      return userRepository.findByUsername(username)
               .map(User::new);
    }
 
@@ -69,6 +68,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     * @param userid the user-id to delete
     */
    public void delete(String userid) {
-      userDao.deleteById(userid);
+      userRepository.deleteById(userid);
    }
 }

@@ -70,6 +70,11 @@ public abstract class CommonDomainRepositoryImpl<D extends DomainModel, E extend
       domainDao.deleteAll();
    }
 
+   @Override
+   public void deleteById(String id) {
+      domainDao.deleteById(id);
+   }
+
    protected D getEntityAndMap(Supplier<E> entitySupplier, String exceptionTemplate, Object... args) {
       E domainEntity = entitySupplier.get();
       if (isNull(domainEntity)) {
